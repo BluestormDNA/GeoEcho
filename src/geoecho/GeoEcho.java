@@ -6,7 +6,6 @@
 package geoecho;
 
 import geoecho.controller.ControllerLogin;
-//import geoecho.view.LoginForm;
 import javax.swing.SwingUtilities;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -37,11 +36,8 @@ public class GeoEcho {
     }
 
     private static void start() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                ControllerLogin controllerLogin = new ControllerLogin();
-            }
+        SwingUtilities.invokeLater(() -> {
+            ControllerLogin controller = new ControllerLogin();
         });
     }
 

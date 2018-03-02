@@ -18,10 +18,11 @@ import java.util.logging.Logger;
  *
  * @author Pedro Cortés
  */
-public class NetManager{
+public class NetManager {
 
     private final String URL = "http://localhost:8080/geoechoserv/servdesk";
     private final int OK = 200;
+    private String id;
 
     public int sendPost(HttpURLConnection con, Packet packet) throws IOException {
         con.setRequestMethod("POST");
@@ -48,17 +49,29 @@ public class NetManager{
 
     public boolean handleLogin(LoginDesk loginDesk) throws IOException {
         boolean auth = false;
-            URL url = new URL(URL);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        URL url = new URL(URL);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
-            if (sendPost(con, loginDesk) == OK) {
-                Packet packet = getResponse(con);
-
-                if (packet instanceof LoginResponse) {
-                    auth = ((LoginResponse) packet).isLogin();
-                }
-            }
+        if (sendPost(con, loginDesk) == OK) {
+            LoginResponse login = (LoginResponse) getResponse(con);
+            id = login.getID();
+            auth = login.isLogin();
+        }
         return auth;
+    }
+
+    public boolean handleLogout(Logout logout) throws IOException {
+        boolean deauth = false;
+        URL url = new URL(URL);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        if (sendPost(con, logout) == OK) {
+            deauth = true;
+        }
+        return deauth;
+    }
+
+    public String getId() {
+        return id;
     }
 
 }
