@@ -33,7 +33,7 @@ public class MapPanel extends MapView {
                     final Map map = getMap();
                     map.setZoom(5.0);
                     GeocoderRequest request = new GeocoderRequest(map);
-                    request.setAddress("Barcelona, España");
+                    request.setAddress("Barcelona");
 
                     getServices().getGeocoder().geocode(request, new GeocoderCallback(map) {
                         @Override
@@ -46,7 +46,7 @@ public class MapPanel extends MapView {
                                 final InfoWindow window = new InfoWindow(map);
                                 window.setContent("Hola Papaya Team!");
                                 window.open(map, marker);
-                                System.out.println("LISTO");
+                                System.out.println("MAPA FINALIZADO CON EXITO");
                             }
                         }
                     });
