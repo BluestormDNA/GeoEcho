@@ -14,6 +14,7 @@ import java.io.Serializable;
 public class LoginResponse implements Packet, Serializable {
 
     private boolean login;
+    private String ID;
 
     public boolean isLogin() {
         return login;
@@ -21,6 +22,14 @@ public class LoginResponse implements Packet, Serializable {
 
     public void setLogin(boolean login) {
         this.login = login;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
 }
