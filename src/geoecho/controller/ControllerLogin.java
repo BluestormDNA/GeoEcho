@@ -35,24 +35,24 @@ public class ControllerLogin implements ActionListener {
         loginDesk.setUser(login.getjTextField1().getText());
         loginDesk.setUser(String.valueOf(login.getjPasswordField1().getPassword()));
         
-        handle(CLEAR);
+        handleStatus(CLEAR);
         Thread thread = new Thread(() -> {
             try {
-                handle(CONNECTING);
+                handleStatus(CONNECTING);
                 if (net.handleLogin(loginDesk)) {
-                    handle(CONNECTED);
+                    handleStatus(CONNECTED);
                 } else {
-                    handle(FAILED);
+                    handleStatus(FAILED);
                 }
             } catch (IOException e) {
-                handle(IOE);
+                handleStatus(IOE);
             }
         });
         thread.start();
 
     }
 
-    public void handle(String msg) {
+    public void handleStatus(String msg) {
         JLabel msgLabel = login.getjLabelMsg();
         switch (msg) {
             case CLEAR:
