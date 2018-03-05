@@ -5,13 +5,11 @@
  */
 package geoecho.model;
 
-import java.io.Serializable;
-
 /**
  *
  * @author BlueStorm
  */
-public class Logout implements Packet, Serializable {
+public class Logout extends Packet {
     
     private String ID;
 

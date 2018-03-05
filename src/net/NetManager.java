@@ -55,7 +55,7 @@ public class NetManager {
         if (sendPost(con, loginDesk) == OK) {
             LoginResponse login = (LoginResponse) getResponse(con);
             id = login.getID();
-            auth = login.isLogin();
+            auth = login.isAlive();
         }
         return auth;
     }

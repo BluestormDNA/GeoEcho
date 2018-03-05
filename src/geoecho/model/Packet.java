@@ -5,10 +5,20 @@
  */
 package geoecho.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Pedro Cortés
  */
-public interface Packet {
-    
+public abstract class Packet implements Serializable{
+    private String sessionID;
+
+    public String getSessionID() {
+        return sessionID;
+    }
+
+    public void setSessionID(String sessionID) {
+        this.sessionID = sessionID;
+    }
 }

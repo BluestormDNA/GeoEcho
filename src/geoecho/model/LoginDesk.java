@@ -5,13 +5,11 @@
  */
 package geoecho.model;
 
-import java.io.Serializable;
-
 /**
  *
  * @author Pedro Cortés
  */
-public class LoginDesk implements Packet, Serializable{
+public class LoginDesk extends Packet{
 
     private String user;
     private String pass;
