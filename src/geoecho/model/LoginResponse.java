@@ -5,23 +5,21 @@
  */
 package geoecho.model;
 
-import java.io.Serializable;
-
 /**
  *
  * @author Pedro Cortés
  */
-public class LoginResponse implements Packet, Serializable {
+public class LoginResponse extends Packet {
 
-    private boolean login;
+    private boolean alive;
     private String ID;
 
-    public boolean isLogin() {
-        return login;
+    public boolean isAlive() {
+        return alive;
     }
 
-    public void setLogin(boolean login) {
-        this.login = login;
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
 
     public String getID() {
