@@ -22,7 +22,6 @@ public class NetManager {
 
     private final String URL = "http://localhost:8080/geoechoserv/servdesk";
     private final int OK = 200;
-    private String id;
 
     public int sendPost(HttpURLConnection con, Packet packet) throws IOException {
         con.setRequestMethod("POST");
@@ -47,17 +46,16 @@ public class NetManager {
         return packet;
     }
 
-    public boolean handleLogin(LoginDesk loginDesk) throws IOException {
-        boolean auth = false;
+    public String handleLogin(LoginDesk loginDesk) throws IOException {
+        String id = null;
         URL url = new URL(URL);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
         if (sendPost(con, loginDesk) == OK) {
-            LoginResponse login = (LoginResponse) getResponse(con);
-            id = login.getID();
-            auth = login.isAlive();
+            Response login = (Response) getResponse(con);
+            id = login.getSessionID();
         }
-        return auth;
+        return id;
     }
 
     public boolean handleLogout(Logout logout) throws IOException {
@@ -68,10 +66,6 @@ public class NetManager {
             deauth = true;
         }
         return deauth;
-    }
-
-    public String getId() {
-        return id;
     }
 
 }

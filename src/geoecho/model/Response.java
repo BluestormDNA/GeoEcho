@@ -7,8 +7,8 @@ package geoecho.model;
 
 /**
  *
- * @author BlueStorm
+ * @author Pedro Cortés
  */
-public class Logout extends Packet {
+public class Response extends Packet {
 
 }

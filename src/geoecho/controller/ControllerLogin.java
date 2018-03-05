@@ -22,7 +22,6 @@ public class ControllerLogin implements ActionListener {
 
     private final LoginForm login;
     private final NetManager net;
-    private String id;
 
     public ControllerLogin() {
         login = new LoginForm();
@@ -35,19 +34,21 @@ public class ControllerLogin implements ActionListener {
         LoginDesk loginDesk = new LoginDesk();
         loginDesk.setUser(login.getjTextField1().getText());
         loginDesk.setUser(String.valueOf(login.getjPasswordField1().getPassword()));
-        
+
         handleStatus(CLEAR);
         Thread thread = new Thread(() -> {
             try {
                 handleStatus(CONNECTING);
-                if (net.handleLogin(loginDesk)) {
+                String id;
+                if ((id = net.handleLogin(loginDesk)) != null) {
                     handleStatus(CONNECTED);
-                    id = net.getId();
+                    ControllerGUI controllerGUI = new ControllerGUI(id);
                 } else {
                     handleStatus(FAILED);
                 }
             } catch (IOException e) {
                 handleStatus(IOE);
+                //ControllerGUI temp = new ControllerGUI(id); //TEMP
             }
         });
         thread.start();
@@ -65,7 +66,7 @@ public class ControllerLogin implements ActionListener {
                 break;
             case CONNECTED:
                 msgLabel.setText(CONNECTED);
-                ControllerGUI controllerGUI = new ControllerGUI(id);
+
                 login.dispose();
                 break;
             case FAILED:
@@ -73,7 +74,6 @@ public class ControllerLogin implements ActionListener {
                 break;
             case IOE:
                 msgLabel.setText(IOE);
-                ControllerGUI temp = new ControllerGUI(id); //TEMP
                 login.dispose(); //TEMP
                 break;
             default:

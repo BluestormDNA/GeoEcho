@@ -39,7 +39,7 @@ class ControllerGUI implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         try {
             Logout logout = new Logout();
-            logout.setID(id);
+            logout.setSessionID(id);
             if (net.handleLogout(logout)) {
                 ControllerLogin login = new ControllerLogin();
                 gui.dispose();
