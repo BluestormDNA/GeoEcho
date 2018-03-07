@@ -46,8 +46,8 @@ public class NetManager {
         return packet;
     }
 
-    public String handleLogin(LoginDesk loginDesk) throws IOException {
-        String id = null;
+    public int handleLogin(LoginDesk loginDesk) throws IOException {
+        int id = 0;
         URL url = new URL(URL);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
 

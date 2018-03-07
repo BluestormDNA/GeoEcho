@@ -10,8 +10,6 @@ import geoecho.view.GUIForm;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.NetManager;
 
 /**
@@ -22,9 +20,9 @@ class ControllerGUI implements ActionListener {
 
     private final GUIForm gui;
     private final NetManager net;
-    private final String id;
+    private final int id;
 
-    public ControllerGUI(String id) {
+    public ControllerGUI(int id) {
         gui = new GUIForm();
         net = new NetManager();
         this.id =  id;

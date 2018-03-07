@@ -39,8 +39,8 @@ public class ControllerLogin implements ActionListener {
         Thread thread = new Thread(() -> {
             try {
                 handleStatus(CONNECTING);
-                String id;
-                if ((id = net.handleLogin(loginDesk)) != null) {
+                int id;
+                if ((id = net.handleLogin(loginDesk)) != 0) {
                     handleStatus(CONNECTED);
                     ControllerGUI controllerGUI = new ControllerGUI(id);
                 } else {
@@ -66,7 +66,6 @@ public class ControllerLogin implements ActionListener {
                 break;
             case CONNECTED:
                 msgLabel.setText(CONNECTED);
-
                 login.dispose();
                 break;
             case FAILED:
@@ -74,7 +73,7 @@ public class ControllerLogin implements ActionListener {
                 break;
             case IOE:
                 msgLabel.setText(IOE);
-                login.dispose(); //TEMP
+                //login.dispose(); //TEMP
                 break;
             default:
         }
