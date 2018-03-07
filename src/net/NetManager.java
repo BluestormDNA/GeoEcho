@@ -5,7 +5,10 @@
  */
 package net;
 
-import geoecho.model.*;
+import model.client.Packet;
+import model.client.Response;
+import model.client.Logout;
+import model.client.LoginDesk;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -20,7 +23,7 @@ import java.util.logging.Logger;
  */
 public class NetManager {
 
-    private final String URL = "http://localhost:8080/geoechoserv/servdesk";
+    private final String URL = "http://geoechoserv.machadocode.com/geoechoserv";
     private final int OK = 200;
 
     public int sendPost(HttpURLConnection con, Packet packet) throws IOException {
@@ -36,8 +39,7 @@ public class NetManager {
 
     private Packet getResponse(HttpURLConnection con) throws IOException {
         Packet packet = null;
-        con.setDoInput(true);
-
+        
         try (ObjectInputStream in = new ObjectInputStream(con.getInputStream())) {
             packet = (Packet) in.readObject();
         } catch (ClassNotFoundException e) {
@@ -53,7 +55,13 @@ public class NetManager {
 
         if (sendPost(con, loginDesk) == OK) {
             Response login = (Response) getResponse(con);
+            System.out.println("OK 200 del Servidor");
+            System.out.println(login);
+            System.out.println("ID del paquete");
+            System.out.println(login.getSessionID());
             id = login.getSessionID();
+            System.out.println("ID local de la funcion");
+            System.out.println(id);
         }
         return id;
     }

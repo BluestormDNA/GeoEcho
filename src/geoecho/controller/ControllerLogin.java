@@ -5,7 +5,7 @@
  */
 package geoecho.controller;
 
-import geoecho.model.LoginDesk;
+import model.client.LoginDesk;
 import geoecho.view.LoginForm;
 import static helpers.Constants.*;
 import java.awt.event.ActionEvent;
@@ -33,7 +33,7 @@ public class ControllerLogin implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         LoginDesk loginDesk = new LoginDesk();
         loginDesk.setUser(login.getjTextField1().getText());
-        loginDesk.setUser(String.valueOf(login.getjPasswordField1().getPassword()));
+        loginDesk.setPass(String.valueOf(login.getjPasswordField1().getPassword()));
 
         handleStatus(CLEAR);
         Thread thread = new Thread(() -> {
@@ -47,6 +47,7 @@ public class ControllerLogin implements ActionListener {
                     handleStatus(FAILED);
                 }
             } catch (IOException e) {
+                e.printStackTrace();
                 handleStatus(IOE);
                 //ControllerGUI temp = new ControllerGUI(id); //TEMP
             }

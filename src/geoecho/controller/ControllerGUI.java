@@ -5,7 +5,7 @@
  */
 package geoecho.controller;
 
-import geoecho.model.Logout;
+import model.client.Logout;
 import geoecho.view.GUIForm;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
