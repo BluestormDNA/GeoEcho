@@ -5,10 +5,14 @@
  */
 package geoecho.controller;
 
+import com.teamdev.jxmaps.MapViewOptions;
 import model.client.Logout;
 import geoecho.view.GUIForm;
+import geoecho.view.MapPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import net.NetManager;
 
@@ -16,7 +20,7 @@ import net.NetManager;
  *
  * @author Pedro Cortés
  */
-class ControllerGUI implements ActionListener {
+class ControllerGUI extends MouseAdapter implements ActionListener {
 
     private final GUIForm gui;
     private final NetManager net;
@@ -25,26 +29,40 @@ class ControllerGUI implements ActionListener {
     public ControllerGUI(int id) {
         gui = new GUIForm();
         net = new NetManager();
-        this.id =  id;
+        this.id = id;
         initializeListener();
     }
 
     private void initializeListener() {
         gui.getjButtonLogout().addActionListener(this);
+        gui.getjPanelBWorld().addMouseListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        try {
-            Logout logout = new Logout();
-            logout.setSessionID(id);
-            if (net.handleLogout(logout)) {
-                ControllerLogin login = new ControllerLogin();
-                gui.dispose();
+        System.out.println(ae.getSource());
+        if (ae.getSource().equals(gui.getjButtonLogout())) {
+            try {
+                Logout logout = new Logout();
+                logout.setSessionID(id);
+                if (net.handleLogout(logout)) {
+                    ControllerLogin login = new ControllerLogin();
+                    gui.dispose();
+                }
+            } catch (IOException ex) {
+                //Logger.getLogger(ControllerGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (IOException ex) {
-            //Logger.getLogger(ControllerGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    @Override
+    public void mouseClicked(java.awt.event.MouseEvent evt) {
+        if (evt.getSource().equals(gui.getjPanelBWorld())) {
+            MapViewOptions options = new MapViewOptions();
+            options.importPlaces();
+            gui.getjPanelWorld().add(new MapPanel(options));
+        } else {
+        }
     }
 }

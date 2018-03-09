@@ -5,7 +5,6 @@
  */
 package geoecho.view;
 
-import com.teamdev.jxmaps.MapViewOptions;
 import static helpers.Constants.*;
 import java.awt.Frame;
 import java.awt.Toolkit;
@@ -497,10 +496,6 @@ private int x;
             jLabelTitulo.setText(TITLE_WORLD);
             this.jPanelWorld.setVisible(true);
             this.jLayeredPane.moveToFront(jPanelWorld);
-            MapViewOptions options = new MapViewOptions();
-            options.importPlaces();
-            jPanelWorld.add(new MapPanel(options));
-
         } else {
             jLabelTitulo.setText(TITLE_NOT_IMPLEMENTED);
             this.jPanelStart.setVisible(true);
@@ -579,5 +574,13 @@ private int x;
 
     public javax.swing.JButton getjButtonLogout() {
         return jButtonLogout;
+    }
+
+    public javax.swing.JPanel getjPanelBWorld() {
+        return jPanelBWorld;
+    }
+
+    public javax.swing.JPanel getjPanelWorld() {
+        return jPanelWorld;
     }
 }
