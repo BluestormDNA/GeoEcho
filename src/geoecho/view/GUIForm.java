@@ -84,15 +84,15 @@ public class GUIForm extends javax.swing.JFrame {
         jLabelIconoCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/close.png"))); // NOI18N
         jLabelIconoCerrar.setName("labelCerrar"); // NOI18N
         jLabelIconoCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelIconoCerrarMouseClicked(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabelIconoCerrarMouseReleased(evt);
             }
         });
 
         jLabelIconoMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/minimize.png"))); // NOI18N
         jLabelIconoMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelIconoMinimizarMouseClicked(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabelIconoMinimizarMouseReleased(evt);
             }
         });
 
@@ -153,9 +153,6 @@ public class GUIForm extends javax.swing.JFrame {
         jPanelBPosition.setName("lateral"); // NOI18N
         jPanelBPosition.setPreferredSize(new java.awt.Dimension(50, 50));
         jPanelBPosition.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanelBMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanelBPositionMouseEntered(evt);
             }
@@ -196,9 +193,6 @@ public class GUIForm extends javax.swing.JFrame {
         jPanelBUser.setName("lateral"); // NOI18N
         jPanelBUser.setPreferredSize(new java.awt.Dimension(50, 50));
         jPanelBUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanelBMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanelBPositionMouseEntered(evt);
             }
@@ -239,9 +233,6 @@ public class GUIForm extends javax.swing.JFrame {
         jPanelBWorld.setName("lateral"); // NOI18N
         jPanelBWorld.setPreferredSize(new java.awt.Dimension(50, 50));
         jPanelBWorld.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanelBMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanelBPositionMouseEntered(evt);
             }
@@ -282,9 +273,6 @@ public class GUIForm extends javax.swing.JFrame {
         jPanelBConfig.setName("lateral"); // NOI18N
         jPanelBConfig.setPreferredSize(new java.awt.Dimension(50, 50));
         jPanelBConfig.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanelBMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanelBPositionMouseEntered(evt);
             }
@@ -325,9 +313,6 @@ public class GUIForm extends javax.swing.JFrame {
         jPanelBStatistic.setName("lateral"); // NOI18N
         jPanelBStatistic.setPreferredSize(new java.awt.Dimension(50, 50));
         jPanelBStatistic.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanelBMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanelBPositionMouseEntered(evt);
             }
@@ -459,16 +444,6 @@ private int x;
         this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);
     }//GEN-LAST:event_jPanelTopMouseDragged
 
-    private void jLabelIconoCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelIconoCerrarMouseClicked
-        // Cierra la app
-        System.exit(0);
-    }//GEN-LAST:event_jLabelIconoCerrarMouseClicked
-
-    private void jLabelIconoMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelIconoMinimizarMouseClicked
-        // Minimiza la app
-        this.setState(Frame.ICONIFIED);
-    }//GEN-LAST:event_jLabelIconoMinimizarMouseClicked
-
     private void jPanelBPositionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelBPositionMouseEntered
         evt.getComponent().setBackground(new java.awt.Color(55, 55, 55));
     }//GEN-LAST:event_jPanelBPositionMouseEntered
@@ -483,26 +458,33 @@ private int x;
 
     private void jPanelBPositionMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelBPositionMouseReleased
         evt.getComponent().setBackground(new java.awt.Color(55, 55, 55));
-    }//GEN-LAST:event_jPanelBPositionMouseReleased
-
-    private void jPanelBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelBMouseClicked
         JPanel jPanel = (JPanel) evt.getSource(); //TODO
         if (jPanel == jPanelBUser) {
             jLabelTitulo.setText(TITLE_USER);
             this.jPanelUser.setVisible(true);
             this.jPanelWorld.setVisible(false);
-            this.jLayeredPane.moveToFront(jPanelUser);
+            //this.jLayeredPane.moveToFront(jPanelUser);
         } else if (jPanel == jPanelBWorld) {
             jLabelTitulo.setText(TITLE_WORLD);
             this.jPanelWorld.setVisible(true);
-            this.jLayeredPane.moveToFront(jPanelWorld);
+            //this.jLayeredPane.moveToFront(jPanelWorld);
         } else {
             jLabelTitulo.setText(TITLE_NOT_IMPLEMENTED);
             this.jPanelStart.setVisible(true);
             this.jPanelWorld.setVisible(false);
-            this.jLayeredPane.moveToFront(jPanelStart);
+            //this.jLayeredPane.moveToFront(jPanelStart);
         }
-    }//GEN-LAST:event_jPanelBMouseClicked
+    }//GEN-LAST:event_jPanelBPositionMouseReleased
+
+    private void jLabelIconoMinimizarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelIconoMinimizarMouseReleased
+        // Minimiza la app
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabelIconoMinimizarMouseReleased
+
+    private void jLabelIconoCerrarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelIconoCerrarMouseReleased
+        // Cierra la app
+        System.exit(0);
+    }//GEN-LAST:event_jLabelIconoCerrarMouseReleased
 
     /**
      * @param args the command line arguments
@@ -575,11 +557,11 @@ private int x;
     public javax.swing.JButton getjButtonLogout() {
         return jButtonLogout;
     }
-
+    
     public javax.swing.JPanel getjPanelBWorld() {
         return jPanelBWorld;
     }
-
+    
     public javax.swing.JPanel getjPanelWorld() {
         return jPanelWorld;
     }

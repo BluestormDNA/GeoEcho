@@ -43,10 +43,10 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabelMsg" pref="200" max="32767" attributes="0"/>
                   <Component id="jTextField1" max="32767" attributes="0"/>
                   <Component id="jPasswordField1" pref="200" max="32767" attributes="0"/>
                   <Component id="jButtonLogin" max="32767" attributes="0"/>
+                  <Component id="jLabelMsg" alignment="0" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -130,7 +130,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelIconoMinimizarMouseClicked"/>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelIconoMinimizarMouseReleased"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelIconoCerrar">
@@ -141,7 +141,7 @@
             <Property name="name" type="java.lang.String" value="labelCerrar" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelIconoCerrarMouseClicked"/>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelIconoCerrarMouseReleased"/>
           </Events>
         </Component>
       </SubComponents>

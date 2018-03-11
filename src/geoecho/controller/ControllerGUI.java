@@ -12,8 +12,9 @@ import geoecho.view.MapPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.NetManager;
 
 /**
@@ -40,29 +41,28 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        System.out.println(ae.getSource());
-        if (ae.getSource().equals(gui.getjButtonLogout())) {
-            try {
-                Logout logout = new Logout();
-                logout.setSessionID(id);
-                if (net.handleLogout(logout)) {
-                    ControllerLogin login = new ControllerLogin();
-                    gui.dispose();
-                }
-            } catch (IOException ex) {
-                //Logger.getLogger(ControllerGUI.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            Logout logout = new Logout();
+            logout.setSessionID(id);
+            if (net.handleLogout(logout)) {
+                ControllerLogin login = new ControllerLogin();
+                gui.dispose();
             }
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerGUI.class.getName()).log(Level.SEVERE, null, ex);
+
         }
 
     }
 
     @Override
     public void mouseClicked(java.awt.event.MouseEvent evt) {
+        /*
         if (evt.getSource().equals(gui.getjPanelBWorld())) {
             MapViewOptions options = new MapViewOptions();
             options.importPlaces();
             gui.getjPanelWorld().add(new MapPanel(options));
-        } else {
         }
+         */
     }
 }

@@ -68,16 +68,16 @@ public class LoginForm extends javax.swing.JFrame {
 
         jLabelIconoMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/minimize.png"))); // NOI18N
         jLabelIconoMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelIconoMinimizarMouseClicked(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabelIconoMinimizarMouseReleased(evt);
             }
         });
 
         jLabelIconoCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/close.png"))); // NOI18N
         jLabelIconoCerrar.setName("labelCerrar"); // NOI18N
         jLabelIconoCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelIconoCerrarMouseClicked(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabelIconoCerrarMouseReleased(evt);
             }
         });
 
@@ -122,10 +122,10 @@ public class LoginForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelMsg, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                     .addComponent(jTextField1)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(jButtonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jButtonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,16 +145,6 @@ public class LoginForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabelIconoMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelIconoMinimizarMouseClicked
-        // Minimiza la app
-        this.setState(Frame.ICONIFIED);
-    }//GEN-LAST:event_jLabelIconoMinimizarMouseClicked
-
-    private void jLabelIconoCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelIconoCerrarMouseClicked
-        // Cierra la app
-        this.dispose();
-    }//GEN-LAST:event_jLabelIconoCerrarMouseClicked
-
     private int x;
     private int y;
     private void jPanelTopMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelTopMousePressed
@@ -167,6 +157,16 @@ public class LoginForm extends javax.swing.JFrame {
         // actualiza x y al hacer arrastrar
         this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);
     }//GEN-LAST:event_jPanelTopMouseDragged
+
+    private void jLabelIconoMinimizarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelIconoMinimizarMouseReleased
+        // Minimiza la app
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabelIconoMinimizarMouseReleased
+
+    private void jLabelIconoCerrarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelIconoCerrarMouseReleased
+        // Cierra la app
+        System.exit(0);
+    }//GEN-LAST:event_jLabelIconoCerrarMouseReleased
 
     /**
      * @param args the command line arguments

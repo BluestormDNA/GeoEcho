@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  */
 public class NetManager {
 
-    private final String URL = "http://geoechoserv.machadocode.com/geoechoserv";
+    private final String URL = "http://ec2-52-31-205-76.eu-west-1.compute.amazonaws.com/geoechoserv";
     private final int OK = 200;
 
     public int sendPost(HttpURLConnection con, Packet packet) throws IOException {

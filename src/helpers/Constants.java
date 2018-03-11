@@ -15,7 +15,7 @@ public class Constants {
     public final static String CLEAR = "";
     public final static String CONNECTING = "Conectando...";
     public final static String CONNECTED = "Conectado";
-    public final static String FAILED = "Nombre de usuario o contraseña incorrectos";
+    public final static String FAILED = "User o pass incorrectos";
     public final static String IOE = "Error de conexión";
 
     //GUI

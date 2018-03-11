@@ -47,9 +47,7 @@ public class ControllerLogin implements ActionListener {
                     handleStatus(FAILED);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
                 handleStatus(IOE);
-                //ControllerGUI temp = new ControllerGUI(id); //TEMP
             }
         });
         thread.start();
@@ -74,7 +72,6 @@ public class ControllerLogin implements ActionListener {
                 break;
             case IOE:
                 msgLabel.setText(IOE);
-                //login.dispose(); //TEMP
                 break;
             default:
         }
