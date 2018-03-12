@@ -26,6 +26,13 @@ public class NetManager {
     private final String URL = "http://ec2-52-31-205-76.eu-west-1.compute.amazonaws.com/geoechoserv";
     private final int OK = 200;
 
+    /**
+     * Envía un objeto del tipo Packet via post
+     * @param con HttpURLConnection a utilizar en la conexión
+     * @param packet Packet a enviar
+     * @return int con el Response Code del envío post http
+     * @throws IOException
+     */
     public int sendPost(HttpURLConnection con, Packet packet) throws IOException {
         con.setRequestMethod("POST");
         con.setDoOutput(true);
@@ -37,6 +44,12 @@ public class NetManager {
         return con.getResponseCode();
     }
 
+    /**
+     * Devuelve un paquete del servidor
+     * @param con HttpURLConnection a utilizar en la conexión
+     * @return Packet procedente del servidor
+     * @throws IOException 
+     */
     private Packet getResponse(HttpURLConnection con) throws IOException {
         Packet packet = null;
         
@@ -48,6 +61,12 @@ public class NetManager {
         return packet;
     }
 
+    /**
+     * Gestiona el login del cliente al servidor
+     * @param loginDesk Paquete loginDesk
+     * @return int con el sessionID del cliente
+     * @throws IOException
+     */
     public int handleLogin(LoginDesk loginDesk) throws IOException {
         int id = 0;
         URL url = new URL(URL);
@@ -66,6 +85,12 @@ public class NetManager {
         return id;
     }
 
+    /**
+     * Gestiona el logout del cliente en el servidor
+     * @param logout Paquete logout
+     * @return true si el paquete ha sido procesado por el servidor
+     * @throws IOException
+     */
     public boolean handleLogout(Logout logout) throws IOException {
         boolean deauth = false;
         URL url = new URL(URL);

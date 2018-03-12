@@ -463,16 +463,16 @@ private int x;
             jLabelTitulo.setText(TITLE_USER);
             this.jPanelUser.setVisible(true);
             this.jPanelWorld.setVisible(false);
-            //this.jLayeredPane.moveToFront(jPanelUser);
+            this.jLayeredPane.moveToFront(jPanelUser);
         } else if (jPanel == jPanelBWorld) {
             jLabelTitulo.setText(TITLE_WORLD);
             this.jPanelWorld.setVisible(true);
-            //this.jLayeredPane.moveToFront(jPanelWorld);
+            this.jLayeredPane.moveToFront(jPanelWorld);
         } else {
             jLabelTitulo.setText(TITLE_NOT_IMPLEMENTED);
             this.jPanelStart.setVisible(true);
             this.jPanelWorld.setVisible(false);
-            //this.jLayeredPane.moveToFront(jPanelStart);
+            this.jLayeredPane.moveToFront(jPanelStart);
         }
     }//GEN-LAST:event_jPanelBPositionMouseReleased
 

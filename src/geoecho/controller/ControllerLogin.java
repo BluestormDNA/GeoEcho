@@ -23,12 +23,20 @@ public class ControllerLogin implements ActionListener {
     private final LoginForm login;
     private final NetManager net;
 
+    /**
+     * Inicia el login, la red y el listener
+     */
     public ControllerLogin() {
         login = new LoginForm();
         login.getjButtonLogin().addActionListener(this);
         net = new NetManager();
     }
 
+    /**
+     * Acción al usar el boton del login
+     * Envia un paquete loginDesk al servidor y procesa la respuesta
+     * @param ae
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         LoginDesk loginDesk = new LoginDesk();
@@ -54,6 +62,10 @@ public class ControllerLogin implements ActionListener {
 
     }
 
+    /**
+     * Modifica el estado de la UI en base a la respuesta del servidor
+     * @param msg mensaje a actualizar
+     */
     public void handleStatus(String msg) {
         JLabel msgLabel = login.getjLabelMsg();
         switch (msg) {
