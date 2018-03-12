@@ -27,18 +27,30 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
     private final NetManager net;
     private final int id;
 
+    /**
+     * Inicia el controlador de la GUI con el sessionID del login
+     * @param id 
+     */
     public ControllerGUI(int id) {
         gui = new GUIForm();
         net = new NetManager();
         this.id = id;
         initializeListener();
     }
-
+    
+    /**
+     * Inicializa los listeners de la GUI
+     */
     private void initializeListener() {
         gui.getjButtonLogout().addActionListener(this);
         gui.getjPanelBWorld().addMouseListener(this);
     }
 
+    /**
+     * Gestiona el boton del logout enviando un paquete logout que si es OK
+     * reinicia el login
+     * @param ae 
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         try {
@@ -50,19 +62,21 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
             }
         } catch (IOException ex) {
             Logger.getLogger(ControllerGUI.class.getName()).log(Level.SEVERE, null, ex);
-
         }
 
     }
 
+    /**
+     * Al clickar en la opcion mapa lo inicializa
+     * @param evt 
+     */
     @Override
     public void mouseClicked(java.awt.event.MouseEvent evt) {
-        /*
         if (evt.getSource().equals(gui.getjPanelBWorld())) {
             MapViewOptions options = new MapViewOptions();
             options.importPlaces();
             gui.getjPanelWorld().add(new MapPanel(options));
         }
-         */
     }
+
 }
