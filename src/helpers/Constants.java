@@ -21,6 +21,9 @@ public class Constants {
     //GUI
     public final static String TITLE_USER = "Usuario";
     public final static String TITLE_WORLD = "Mapa";
-    public final static String TITLE_NOT_IMPLEMENTED = "NOT IMPLEMENTED";
+    public final static String TITLE_CONFIG = "Configuración";
+    public final static String TITLE_STADISTIC = "Estadísticas";
+    public final static String TITLE_MARKER= "Mensajes";
+    public final static String TITLE_ROUTE = "Rutas";
 
 }

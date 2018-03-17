@@ -59,7 +59,6 @@ public class ControllerLogin implements ActionListener {
             }
         });
         thread.start();
-
     }
 
     /**
