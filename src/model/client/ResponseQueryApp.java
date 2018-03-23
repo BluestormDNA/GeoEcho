@@ -2,12 +2,13 @@
  * App GeoEcho (Projecte final M13-DAM al IOC)
  * Copyright (c) 2018 - Papaya Team
  */
+
 package model.client;
 
 /**
- * Classe logout per sortir del sistema del model de dades a empaquetar en les comunicacions
+ * Classe ResponseQueryApp que embolcalla la resposta del servidor alsw clients App
  * @author Dani Machado
  */
-public class Logout extends Packet{
+public class ResponseQueryApp extends ResponseQuery{
 
 }

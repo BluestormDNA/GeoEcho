@@ -28,6 +28,7 @@ public class NetManager {
 
     /**
      * Envía un objeto del tipo Packet via post
+     *
      * @param con HttpURLConnection a utilizar en la conexión
      * @param packet Packet a enviar
      * @return int con el Response Code del envío post http
@@ -46,13 +47,14 @@ public class NetManager {
 
     /**
      * Devuelve un paquete del servidor
+     *
      * @param con HttpURLConnection a utilizar en la conexión
      * @return Packet procedente del servidor
-     * @throws IOException 
+     * @throws IOException
      */
     private Packet getResponse(HttpURLConnection con) throws IOException {
         Packet packet = null;
-        
+
         try (ObjectInputStream in = new ObjectInputStream(con.getInputStream())) {
             packet = (Packet) in.readObject();
         } catch (ClassNotFoundException e) {
@@ -63,6 +65,7 @@ public class NetManager {
 
     /**
      * Gestiona el login del cliente al servidor
+     *
      * @param loginDesk Paquete loginDesk
      * @return int con el sessionID del cliente
      * @throws IOException
@@ -74,31 +77,32 @@ public class NetManager {
 
         if (sendPost(con, loginDesk) == OK) {
             Response login = (Response) getResponse(con);
-            System.out.println("OK 200 del Servidor");
-            System.out.println(login);
-            System.out.println("ID del paquete");
-            System.out.println(login.getSessionID());
             id = login.getSessionID();
-            System.out.println("ID local de la funcion");
-            System.out.println(id);
         }
         return id;
     }
 
     /**
      * Gestiona el logout del cliente en el servidor
-     * @param logout Paquete logout
+     *
+     * @param packet Packet class
      * @return true si el paquete ha sido procesado por el servidor
      * @throws IOException
      */
-    public boolean handleLogout(Logout logout) throws IOException {
-        boolean deauth = false;
+    public boolean sendPacket(Packet packet) throws IOException {
+        boolean handled = false;
         URL url = new URL(URL);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        if (sendPost(con, logout) == OK) {
-            deauth = true;
+        if (sendPost(con, packet) == OK) {
+            handled = true;
         }
-        return deauth;
+        return handled;
+    }
+
+    public Packet getPacket() throws IOException {
+        URL url = new URL(URL);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        return getResponse(con);
     }
 
 }

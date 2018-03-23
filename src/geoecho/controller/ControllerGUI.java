@@ -15,6 +15,9 @@ import java.awt.event.MouseAdapter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
+import model.client.QueryDesk;
+import model.client.User;
 import net.NetManager;
 
 /**
@@ -29,7 +32,8 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
 
     /**
      * Inicia el controlador de la GUI con el sessionID del login
-     * @param id 
+     *
+     * @param id
      */
     public ControllerGUI(int id) {
         gui = new GUIForm();
@@ -37,7 +41,7 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
         this.id = id;
         initializeListener();
     }
-    
+
     /**
      * Inicializa los listeners de la GUI
      */
@@ -49,14 +53,15 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
     /**
      * Gestiona el boton del logout enviando un paquete logout que si es OK
      * reinicia el login
-     * @param ae 
+     *
+     * @param ae
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
         try {
             Logout logout = new Logout();
             logout.setSessionID(id);
-            if (net.handleLogout(logout)) {
+            if (net.sendPacket(logout)) {
                 ControllerLogin login = new ControllerLogin();
                 gui.dispose();
             }
@@ -68,15 +73,58 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
 
     /**
      * Al clickar en la opcion mapa lo inicializa
-     * @param evt 
+     *
+     * @param evt
      */
     @Override
     public void mouseClicked(java.awt.event.MouseEvent evt) {
         if (evt.getSource().equals(gui.getjPanelBWorld())) {
-            MapViewOptions options = new MapViewOptions();
-            options.importPlaces();
-            gui.getjPanelWorld().add(new MapPanel(options));
+            handleWorldPanel();
+        } else if (evt.getSource().equals(gui.getjPanelBUser())) {
+            handleUserPanel();
+        } else if (evt.getSource().equals(gui.getjPanelBStatistic())) {
+            handleStatisticsPanel();
+        } else if (evt.getSource().equals(gui.getjPanelBConfig())) {
+            //TODO POSIBLE BOTON ?
+        } else if (evt.getSource().equals(gui.getjPanelBMarker())) {
+            handleMarkerPanel();
+        } else if(evt.getSource().equals(gui.getjPanelBPolyLine())){
+            //TODO BOTON????
         }
+    }
+
+    private void handleUserPanel() {
+        JLabel user = gui.getJlabelUser();
+        JLabel email = gui.getjLabelmail();
+        QueryDesk queryDesk = new QueryDesk();
+        queryDesk.setSessionID(id);
+
+        try {
+            if (net.sendPacket(queryDesk)) {
+                User userPacket = (User) net.getPacket();
+                user.setText(userPacket.getUsername());
+                email.setText(userPacket.getEmail());
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void handleStatisticsPanel() {
+        //TODO Hablar con Machado a ver si puede enviarme los datos
+    }
+
+    private void handleWorldPanel() {
+        
+        
+        
+        MapViewOptions options = new MapViewOptions();
+        options.importPlaces();
+        gui.getjPanelWorld().add(new MapPanel(options));
+    }
+
+    private void handleMarkerPanel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
