@@ -25,5 +25,7 @@ public class Constants {
     public final static String TITLE_STADISTIC = "Statistics";
     public final static String TITLE_MARKER= "Messages";
     public final static String TITLE_ROUTE = "Trace route";
+    
+    public final static String ALL = "all";
 
 }

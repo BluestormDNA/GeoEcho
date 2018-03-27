@@ -16,6 +16,8 @@ import com.teamdev.jxmaps.MapStatus;
 import com.teamdev.jxmaps.MapViewOptions;
 import com.teamdev.jxmaps.Marker;
 import com.teamdev.jxmaps.swing.MapView;
+import java.util.List;
+import model.client.Message;
 
 /**
  *
@@ -23,7 +25,7 @@ import com.teamdev.jxmaps.swing.MapView;
  */
 public class MapPanel extends MapView {
 
-    public MapPanel(MapViewOptions options) {
+    public MapPanel(MapViewOptions options, List<Message> messageList) {
         super(options);
         setOnMapReadyHandler(new MapReadyHandler() {
             @Override
@@ -33,23 +35,26 @@ public class MapPanel extends MapView {
                     final Map map = getMap();
                     map.setZoom(5.0);
                     GeocoderRequest request = new GeocoderRequest(map);
-                    request.setAddress("Barcelona");
 
-                    getServices().getGeocoder().geocode(request, new GeocoderCallback(map) {
-                        @Override
-                        public void onComplete(GeocoderResult[] result, GeocoderStatus status) {
-                            if (status == GeocoderStatus.OK) {
-                                map.setCenter(result[0].getGeometry().getLocation());
-                                Marker marker = new Marker(map);
-                                marker.setPosition(result[0].getGeometry().getLocation());
+                    for (Message m : messageList) {
+                        request.setAddress(m.getCoordinates().x + " " + m.getCoordinates().y);
+                        getServices().getGeocoder().geocode(request, new GeocoderCallback(map) {
+                            @Override
+                            public void onComplete(GeocoderResult[] result, GeocoderStatus status) {
+                                if (status == GeocoderStatus.OK) {
+                                    map.setCenter(result[0].getGeometry().getLocation());
+                                    Marker marker = new Marker(map);
+                                    marker.setPosition(result[0].getGeometry().getLocation());
 
-                                final InfoWindow window = new InfoWindow(map);
-                                window.setContent("Hola Papaya Team!");
-                                window.open(map, marker);
-                                System.out.println("MAPA FINALIZADO CON EXITO");
+                                    final InfoWindow window = new InfoWindow(map);
+                                    window.setContent(m.getText());
+                                    window.open(map, marker);
+                                    System.out.println("MAPA FINALIZADO CON EXITO");
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+
                 }
             }
         });

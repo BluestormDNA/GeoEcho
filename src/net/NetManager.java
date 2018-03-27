@@ -7,8 +7,6 @@ package net;
 
 import model.client.Packet;
 import model.client.Response;
-import model.client.Logout;
-import model.client.LoginDesk;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -16,6 +14,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.client.LoginDesk;
+import model.client.QueryDesk;
+import model.client.ResponseQueryDesk;
 
 /**
  *
@@ -25,6 +26,10 @@ public class NetManager {
 
     private final String URL = "http://ec2-52-31-205-76.eu-west-1.compute.amazonaws.com/geoechoserv";
     private final int OK = 200;
+    
+    
+    private String user;
+    private int id;
 
     /**
      * Envía un objeto del tipo Packet via post
@@ -103,6 +108,34 @@ public class NetManager {
         URL url = new URL(URL);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         return getResponse(con);
+    }
+
+    public ResponseQueryDesk getFromServer(String user) {
+        ResponseQueryDesk responsePacket = null;
+        QueryDesk queryDesk = new QueryDesk();
+        queryDesk.setSessionID(id);
+        queryDesk.setUser(user);
+        try {
+            if (sendPacket(queryDesk)) {
+                responsePacket = (ResponseQueryDesk) getPacket();
+            }
+        } catch (IOException ex) {
+            System.out.println("FAILED TO GET FROM SERVER"); //PASAARLO A LABEL???
+        }
+        return responsePacket;
+    }
+
+    public void initializeCredential(int id, String user) {
+        this.id = id;
+        this.user = user;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public int getId() {
+        return id;
     }
 
 }

@@ -6,18 +6,17 @@
 package geoecho.controller;
 
 import com.teamdev.jxmaps.MapViewOptions;
-import model.client.Logout;
 import geoecho.view.GUIForm;
 import geoecho.view.MapPanel;
+import static helpers.Constants.ALL;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
-import model.client.QueryDesk;
-import model.client.User;
+import model.client.*;
 import net.NetManager;
 
 /**
@@ -28,17 +27,15 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
 
     private final GUIForm gui;
     private final NetManager net;
-    private final int id;
 
     /**
      * Inicia el controlador de la GUI con el sessionID del login
      *
      * @param id
      */
-    public ControllerGUI(int id) {
+    public ControllerGUI(NetManager net) {
         gui = new GUIForm();
-        net = new NetManager();
-        this.id = id;
+        this.net = net;
         initializeListener();
     }
 
@@ -60,7 +57,7 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         try {
             Logout logout = new Logout();
-            logout.setSessionID(id);
+            logout.setSessionID(net.getId());
             if (net.sendPacket(logout)) {
                 ControllerLogin login = new ControllerLogin();
                 gui.dispose();
@@ -88,43 +85,43 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
             //TODO POSIBLE BOTON ?
         } else if (evt.getSource().equals(gui.getjPanelBMarker())) {
             handleMarkerPanel();
-        } else if(evt.getSource().equals(gui.getjPanelBPolyLine())){
+        } else if (evt.getSource().equals(gui.getjPanelBPolyLine())) {
             //TODO BOTON????
         }
     }
 
     private void handleUserPanel() {
-        JLabel user = gui.getJlabelUser();
-        JLabel email = gui.getjLabelmail();
-        QueryDesk queryDesk = new QueryDesk();
-        queryDesk.setSessionID(id);
-
-        try {
-            if (net.sendPacket(queryDesk)) {
-                User userPacket = (User) net.getPacket();
-                user.setText(userPacket.getUsername());
-                email.setText(userPacket.getEmail());
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(ControllerGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ResponseQueryDesk me = net.getFromServer(net.getUser());
+        
+        gui.getJlabelUser().setText(me.getUserList().get(0).getUsername());
+        gui.getjLabelmail().setText(me.getUserList().get(0).getEmail());
     }
 
     private void handleStatisticsPanel() {
-        //TODO Hablar con Machado a ver si puede enviarme los datos
+        ResponseQueryDesk responseQueryDesk = net.getFromServer(ALL);
+        
+        List<Message> messageList = responseQueryDesk.getMessageList();
+        List<User> userList = responseQueryDesk.getUserList();
+        
+        String msgCounter = String.valueOf(messageList.size());
+        String userCounter = String.valueOf(userList.size());
+       
+        gui.getjLabelTotalMessageStatistics().setText(msgCounter);
+        gui.getjLabelTotalUserStatistics().setText(userCounter);
     }
 
     private void handleWorldPanel() {
-        
-        
+        List messageList = net.getFromServer(ALL).getMessageList();
         
         MapViewOptions options = new MapViewOptions();
         options.importPlaces();
-        gui.getjPanelWorld().add(new MapPanel(options));
+        gui.getjPanelWorld().add(new MapPanel(options, messageList));
     }
 
     private void handleMarkerPanel() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
 
 }

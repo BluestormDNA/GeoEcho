@@ -50,7 +50,8 @@ public class ControllerLogin implements ActionListener {
                 int id;
                 if ((id = net.handleLogin(loginDesk)) != 0) {
                     handleStatus(CONNECTED);
-                    ControllerGUI controllerGUI = new ControllerGUI(id);
+                    net.initializeCredential(id, login.getjTextField1().getText());
+                    ControllerGUI controllerGUI = new ControllerGUI(net);
                 } else {
                     handleStatus(FAILED);
                 }

@@ -6,7 +6,6 @@
 package geoecho.view;
 
 import static helpers.Constants.*;
-import java.awt.Component;
 import java.awt.Frame;
 import java.awt.Toolkit;
 import javax.swing.JPanel;
@@ -68,11 +67,11 @@ public class GUIForm extends javax.swing.JFrame {
         jPanelStadistics = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel14 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jLabelTotalUserStatistics = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        jLabelTotalMessageStatistics = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jPanelMarker = new javax.swing.JPanel();
@@ -509,8 +508,8 @@ public class GUIForm extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Total Users:");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jLabel8.setText("0");
+        jLabelTotalUserStatistics.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabelTotalUserStatistics.setText("0");
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Total Active Users (last 24h):");
@@ -521,8 +520,8 @@ public class GUIForm extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setText("Total Messages:");
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jLabel18.setText("0");
+        jLabelTotalMessageStatistics.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabelTotalMessageStatistics.setText("0");
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel19.setText("Total Messages (last 24h):");
@@ -538,7 +537,7 @@ public class GUIForm extends javax.swing.JFrame {
                 .addGroup(jPanelStadisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelStadisticsLayout.createSequentialGroup()
                         .addGap(159, 159, 159)
-                        .addComponent(jLabel8))
+                        .addComponent(jLabelTotalUserStatistics))
                     .addGroup(jPanelStadisticsLayout.createSequentialGroup()
                         .addGap(158, 158, 158)
                         .addComponent(jLabel16))
@@ -559,7 +558,7 @@ public class GUIForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelStadisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelStadisticsLayout.createSequentialGroup()
-                                .addComponent(jLabel18)
+                                .addComponent(jLabelTotalMessageStatistics)
                                 .addGap(162, 162, 162))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelStadisticsLayout.createSequentialGroup()
                                 .addComponent(jLabel20)
@@ -577,7 +576,7 @@ public class GUIForm extends javax.swing.JFrame {
                         .addGap(54, 54, 54)
                         .addComponent(jLabel14)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel8)
+                        .addComponent(jLabelTotalUserStatistics)
                         .addGap(118, 118, 118)
                         .addComponent(jLabel15)
                         .addGap(18, 18, 18)
@@ -586,7 +585,7 @@ public class GUIForm extends javax.swing.JFrame {
                         .addGap(53, 53, 53)
                         .addComponent(jLabel17)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel18)
+                        .addComponent(jLabelTotalMessageStatistics)
                         .addGap(117, 117, 117)
                         .addComponent(jLabel19)
                         .addGap(18, 18, 18)
@@ -834,7 +833,6 @@ public class GUIForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -845,12 +843,13 @@ public class GUIForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelIconoCerrar;
     private javax.swing.JLabel jLabelIconoMinimizar;
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JLabel jLabelTotalMessageStatistics;
+    private javax.swing.JLabel jLabelTotalUserStatistics;
     private javax.swing.JLabel jLabelmail;
     private javax.swing.JLayeredPane jLayeredPane;
     private javax.swing.JPanel jPanelBConfig;
@@ -934,5 +933,13 @@ public class GUIForm extends javax.swing.JFrame {
 
     public javax.swing.JPanel getjPanelBPolyLine() {
         return jPanelBPolyLine;
+    }
+
+    public javax.swing.JLabel getjLabelTotalMessageStatistics() {
+        return jLabelTotalMessageStatistics;
+    }
+
+    public javax.swing.JLabel getjLabelTotalUserStatistics() {
+        return jLabelTotalUserStatistics;
     }
 }
