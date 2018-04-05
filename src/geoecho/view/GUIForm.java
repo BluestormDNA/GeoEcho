@@ -57,6 +57,7 @@ public class GUIForm extends javax.swing.JFrame {
         jPanelSplash = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jPanelConfig = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -428,35 +429,20 @@ public class GUIForm extends javax.swing.JFrame {
 
         getContentPane().add(jPanelBMarker, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, -1, -1));
 
+        jPanelSplash.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(33, 33, 33));
         jLabel9.setText("Welcome to GeoEcho");
+        jPanelSplash.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(33, 33, 33));
         jLabel10.setText("Administrative Tools");
+        jPanelSplash.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
 
-        javax.swing.GroupLayout jPanelSplashLayout = new javax.swing.GroupLayout(jPanelSplash);
-        jPanelSplash.setLayout(jPanelSplashLayout);
-        jPanelSplashLayout.setHorizontalGroup(
-            jPanelSplashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelSplashLayout.createSequentialGroup()
-                .addGroup(jPanelSplashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelSplashLayout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(jLabel9))
-                    .addGroup(jPanelSplashLayout.createSequentialGroup()
-                        .addGap(191, 191, 191)
-                        .addComponent(jLabel10)))
-                .addContainerGap(238, Short.MAX_VALUE))
-        );
-        jPanelSplashLayout.setVerticalGroup(
-            jPanelSplashLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelSplashLayout.createSequentialGroup()
-                .addGap(128, 128, 128)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
-                .addContainerGap(228, Short.MAX_VALUE))
-        );
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/world-512.png"))); // NOI18N
+        jPanelSplash.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, -1, -1));
 
         jPanelConfig.setVisible(false);
 
@@ -473,7 +459,7 @@ public class GUIForm extends javax.swing.JFrame {
             jPanelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConfigLayout.createSequentialGroup()
-                .addContainerGap(447, Short.MAX_VALUE)
+                .addContainerGap(587, Short.MAX_VALUE)
                 .addGroup(jPanelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConfigLayout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -498,7 +484,7 @@ public class GUIForm extends javax.swing.JFrame {
                 .addGroup(jPanelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jToggleButton1)
                     .addComponent(jLabel13))
-                .addContainerGap(350, Short.MAX_VALUE))
+                .addContainerGap(472, Short.MAX_VALUE))
         );
 
         jPanelWorld.setLayout(new java.awt.BorderLayout());
@@ -547,7 +533,7 @@ public class GUIForm extends javax.swing.JFrame {
                     .addGroup(jPanelStadisticsLayout.createSequentialGroup()
                         .addGap(135, 135, 135)
                         .addComponent(jLabel14)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 271, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanelStadisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelStadisticsLayout.createSequentialGroup()
@@ -590,7 +576,7 @@ public class GUIForm extends javax.swing.JFrame {
                         .addComponent(jLabel19)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel20)))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(214, Short.MAX_VALUE))
         );
 
         jPanelMarker.setLayout(new java.awt.BorderLayout());
@@ -663,7 +649,7 @@ public class GUIForm extends javax.swing.JFrame {
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanelSplash, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelWorld, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE))
+                .addComponent(jPanelWorld, javax.swing.GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE))
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanelStadistics, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -748,17 +734,17 @@ public class GUIForm extends javax.swing.JFrame {
         } else if (jPanel == jPanelBStatistic) {
             jLabelTitulo.setText(TITLE_STADISTIC);
             this.jPanelStadistics.setVisible(true);
-            this.jLayeredPane.moveToFront(jPanelConfig);
+            this.jLayeredPane.moveToFront(jPanelStadistics);
 
         } else if (jPanel == jPanelBMarker) {
             jLabelTitulo.setText(TITLE_MARKER);
             this.jPanelMarker.setVisible(true);
-            this.jLayeredPane.moveToFront(jPanelConfig);
+            this.jLayeredPane.moveToFront(jPanelMarker);
 
         } else if (jPanel == jPanelBPolyLine) {
             jLabelTitulo.setText(TITLE_ROUTE);
             this.jPanelPolyline.setVisible(true);
-            this.jLayeredPane.moveToFront(jPanelConfig);
+            this.jLayeredPane.moveToFront(jPanelPolyline);
         }
     }//GEN-LAST:event_jPanelMouseReleased
 
@@ -843,6 +829,7 @@ public class GUIForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelIconoCerrar;
     private javax.swing.JLabel jLabelIconoMinimizar;

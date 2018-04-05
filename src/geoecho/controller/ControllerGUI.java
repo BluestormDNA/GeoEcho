@@ -44,7 +44,6 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
      */
     private void initializeListener() {
         gui.getjButtonLogout().addActionListener(this);
-        gui.getjPanelBWorld().addMouseListener(this);
     }
 
     /**
@@ -69,7 +68,7 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
     }
 
     /**
-     * Al clickar en la opcion mapa lo inicializa
+     * Inicializa el panel seleccionado
      *
      * @param evt
      */
@@ -82,37 +81,37 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
         } else if (evt.getSource().equals(gui.getjPanelBStatistic())) {
             handleStatisticsPanel();
         } else if (evt.getSource().equals(gui.getjPanelBConfig())) {
-            //TODO POSIBLE BOTON ?
+            //TODO Habria que gestioanrlo con un boton save o algo y que pille labels
         } else if (evt.getSource().equals(gui.getjPanelBMarker())) {
             handleMarkerPanel();
         } else if (evt.getSource().equals(gui.getjPanelBPolyLine())) {
-            //TODO BOTON????
+            //TODO boton enviar con el usuario que decida el textBox
         }
     }
 
     private void handleUserPanel() {
         ResponseQueryDesk me = net.getFromServer(net.getUser());
-        
+
         gui.getJlabelUser().setText(me.getUserList().get(0).getUsername());
         gui.getjLabelmail().setText(me.getUserList().get(0).getEmail());
     }
 
     private void handleStatisticsPanel() {
         ResponseQueryDesk responseQueryDesk = net.getFromServer(ALL);
-        
+
         List<Message> messageList = responseQueryDesk.getMessageList();
         List<User> userList = responseQueryDesk.getUserList();
-        
+
         String msgCounter = String.valueOf(messageList.size());
         String userCounter = String.valueOf(userList.size());
-       
+
         gui.getjLabelTotalMessageStatistics().setText(msgCounter);
         gui.getjLabelTotalUserStatistics().setText(userCounter);
     }
 
     private void handleWorldPanel() {
         List messageList = net.getFromServer(ALL).getMessageList();
-        
+
         MapViewOptions options = new MapViewOptions();
         options.importPlaces();
         gui.getjPanelWorld().add(new MapPanel(options, messageList));
@@ -121,7 +120,5 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
     private void handleMarkerPanel() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-
 
 }
