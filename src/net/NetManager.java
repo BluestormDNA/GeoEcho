@@ -114,7 +114,7 @@ public class NetManager {
         ResponseQueryDesk responsePacket = null;
         QueryDesk queryDesk = new QueryDesk();
         queryDesk.setSessionID(id);
-        queryDesk.setUser(user);
+        queryDesk.setUsername(user);
         try {
             if (sendPacket(queryDesk)) {
                 responsePacket = (ResponseQueryDesk) getPacket();

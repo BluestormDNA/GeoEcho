@@ -59,11 +59,26 @@ public class GUIForm extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanelConfig = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jTextField1 = new javax.swing.JTextField();
+        jPanelUserInfo = new javax.swing.JPanel();
+        jPanelUserInfo.setVisible(false);
+        jToggleButtonBanUser = new javax.swing.JToggleButton();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        jLabel18 = new javax.swing.JLabel();
+        jLabelUserInfoName = new javax.swing.JLabel();
+        jLabelUserInfoEmail = new javax.swing.JLabel();
+        jLabelUserInfoType = new javax.swing.JLabel();
+        jLabelUserInfoTotalMessages = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextAreaUserMessages = new javax.swing.JTextArea();
+        jButtonSearchUser = new javax.swing.JButton();
+        jTextFieldSearchUser = new javax.swing.JTextField();
+        jLabelSearch = new javax.swing.JLabel();
+        jLabelUserServerInfo = new javax.swing.JLabel();
         jPanelWorld = new javax.swing.JPanel();
         jPanelStadistics = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -429,6 +444,9 @@ public class GUIForm extends javax.swing.JFrame {
 
         getContentPane().add(jPanelBMarker, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, -1, -1));
 
+        jLayeredPane.setPreferredSize(new java.awt.Dimension(750, 450));
+
+        jPanelSplash.setPreferredSize(new java.awt.Dimension(750, 450));
         jPanelSplash.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -444,50 +462,159 @@ public class GUIForm extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/world-512.png"))); // NOI18N
         jPanelSplash.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, -1, -1));
 
+        jPanelConfig.setPreferredSize(new java.awt.Dimension(750, 450));
         jPanelConfig.setVisible(false);
 
-        jLabel6.setText("Search User:");
+        jToggleButtonBanUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jToggleButtonBanUser.setForeground(new java.awt.Color(255, 51, 51));
+        jToggleButtonBanUser.setText("BAN USER");
 
-        jLabel13.setText("   ");
-        jLabel13.setToolTipText("");
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setText("User name:");
 
-        jToggleButton1.setText("BAN USER");
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("Registered E-mail:");
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("User Type:");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setText("Total Messages:");
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel18.setText("Last Messages:");
+
+        jLabelUserInfoName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelUserInfoName.setText(" ");
+        jLabelUserInfoName.setToolTipText("");
+
+        jLabelUserInfoEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelUserInfoEmail.setText(" ");
+        jLabelUserInfoEmail.setToolTipText("");
+
+        jLabelUserInfoType.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelUserInfoType.setText(" ");
+        jLabelUserInfoType.setToolTipText("");
+
+        jLabelUserInfoTotalMessages.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelUserInfoTotalMessages.setText(" ");
+        jLabelUserInfoTotalMessages.setToolTipText("");
+
+        jTextAreaUserMessages.setColumns(20);
+        jTextAreaUserMessages.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaUserMessages);
+
+        javax.swing.GroupLayout jPanelUserInfoLayout = new javax.swing.GroupLayout(jPanelUserInfo);
+        jPanelUserInfo.setLayout(jPanelUserInfoLayout);
+        jPanelUserInfoLayout.setHorizontalGroup(
+            jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelUserInfoLayout.createSequentialGroup()
+                .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelUserInfoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jToggleButtonBanUser))
+                    .addGroup(jPanelUserInfoLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel13)
+                                .addComponent(jLabel12)
+                                .addComponent(jLabel6)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUserInfoLayout.createSequentialGroup()
+                                    .addComponent(jLabel11)
+                                    .addGap(14, 14, 14)))
+                            .addGroup(jPanelUserInfoLayout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelUserInfoLayout.createSequentialGroup()
+                                .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabelUserInfoTotalMessages, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabelUserInfoType, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabelUserInfoName, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabelUserInfoEmail, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1))))
+                .addContainerGap())
+            .addComponent(jSeparator3)
+        );
+        jPanelUserInfoLayout.setVerticalGroup(
+            jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUserInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabelUserInfoName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelUserInfoEmail))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabelUserInfoType))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabelUserInfoTotalMessages))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel18)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jToggleButtonBanUser)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jButtonSearchUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonSearchUser.setText("Search");
+
+        jTextFieldSearchUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldSearchUser.setText("User");
+
+        jLabelUserServerInfo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelUserServerInfo.setText(" ");
 
         javax.swing.GroupLayout jPanelConfigLayout = new javax.swing.GroupLayout(jPanelConfig);
         jPanelConfig.setLayout(jPanelConfigLayout);
         jPanelConfigLayout.setHorizontalGroup(
             jPanelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
+            .addComponent(jPanelUserInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConfigLayout.createSequentialGroup()
-                .addContainerGap(587, Short.MAX_VALUE)
+                .addContainerGap(309, Short.MAX_VALUE)
                 .addGroup(jPanelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConfigLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConfigLayout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(73, 73, 73)
-                        .addComponent(jToggleButton1)))
-                .addGap(30, 30, 30))
+                    .addComponent(jLabelSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelUserServerInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldSearchUser, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonSearchUser)
+                .addContainerGap())
         );
         jPanelConfigLayout.setVerticalGroup(
             jPanelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelConfigLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(17, 17, 17)
                 .addGroup(jPanelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jButtonSearchUser)
+                    .addComponent(jTextFieldSearchUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelSearch)
+                    .addComponent(jLabelUserServerInfo))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1)
-                    .addComponent(jLabel13))
-                .addContainerGap(472, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelUserInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(212, 212, 212))
         );
 
+        jPanelWorld.setPreferredSize(new java.awt.Dimension(750, 450));
         jPanelWorld.setLayout(new java.awt.BorderLayout());
+
+        jPanelStadistics.setPreferredSize(new java.awt.Dimension(750, 450));
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -579,8 +706,10 @@ public class GUIForm extends javax.swing.JFrame {
                 .addContainerGap(214, Short.MAX_VALUE))
         );
 
+        jPanelMarker.setPreferredSize(new java.awt.Dimension(750, 450));
         jPanelMarker.setLayout(new java.awt.BorderLayout());
 
+        jPanelPolyline.setPreferredSize(new java.awt.Dimension(750, 450));
         jPanelPolyline.setLayout(new java.awt.BorderLayout());
 
         jPanelUser.setVisible(false);
@@ -649,9 +778,9 @@ public class GUIForm extends javax.swing.JFrame {
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanelSplash, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelWorld, javax.swing.GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE))
+                .addComponent(jPanelWorld, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelStadistics, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelStadistics, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE))
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanelMarker, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -670,7 +799,7 @@ public class GUIForm extends javax.swing.JFrame {
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanelWorld, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelStadistics, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelStadistics, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE))
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanelMarker, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -812,13 +941,17 @@ public class GUIForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogout;
+    private javax.swing.JButton jButtonSearchUser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -834,9 +967,15 @@ public class GUIForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelIconoCerrar;
     private javax.swing.JLabel jLabelIconoMinimizar;
     private javax.swing.JLabel jLabelLogo;
+    private javax.swing.JLabel jLabelSearch;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelTotalMessageStatistics;
     private javax.swing.JLabel jLabelTotalUserStatistics;
+    private javax.swing.JLabel jLabelUserInfoEmail;
+    private javax.swing.JLabel jLabelUserInfoName;
+    private javax.swing.JLabel jLabelUserInfoTotalMessages;
+    private javax.swing.JLabel jLabelUserInfoType;
+    private javax.swing.JLabel jLabelUserServerInfo;
     private javax.swing.JLabel jLabelmail;
     private javax.swing.JLayeredPane jLayeredPane;
     private javax.swing.JPanel jPanelBConfig;
@@ -854,11 +993,15 @@ public class GUIForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelSup;
     private javax.swing.JPanel jPanelTop;
     private javax.swing.JPanel jPanelUser;
+    private javax.swing.JPanel jPanelUserInfo;
     private javax.swing.JPanel jPanelWorld;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTextArea jTextAreaUserMessages;
+    private javax.swing.JTextField jTextFieldSearchUser;
+    private javax.swing.JToggleButton jToggleButtonBanUser;
     private javax.swing.JLabel jlabelUser;
     // End of variables declaration//GEN-END:variables
 
@@ -929,4 +1072,47 @@ public class GUIForm extends javax.swing.JFrame {
     public javax.swing.JLabel getjLabelTotalUserStatistics() {
         return jLabelTotalUserStatistics;
     }
+
+    public javax.swing.JButton getjButtonSearchUser() {
+        return jButtonSearchUser;
+    }
+
+    public javax.swing.JLabel getjLabelUserInfoEmail() {
+        return jLabelUserInfoEmail;
+    }
+
+    public javax.swing.JLabel getjLabelUserInfoName() {
+        return jLabelUserInfoName;
+    }
+
+    public javax.swing.JLabel getjLabelUserInfoTotalMessages() {
+        return jLabelUserInfoTotalMessages;
+    }
+
+    public javax.swing.JLabel getjLabelUserInfoType() {
+        return jLabelUserInfoType;
+    }
+
+    public javax.swing.JLabel getjLabelUserServerInfo() {
+        return jLabelUserServerInfo;
+    }
+
+    public javax.swing.JPanel getjPanelUserInfo() {
+        return jPanelUserInfo;
+    }
+
+    public javax.swing.JTextField getjTextFieldSearchUser() {
+        return jTextFieldSearchUser;
+    }
+
+    public javax.swing.JToggleButton getjToggleButtonBanUser() {
+        return jToggleButtonBanUser;
+    }
+
+    public javax.swing.JTextArea getjTextAreaUserMessages() {
+        return jTextAreaUserMessages;
+    }
+
+    
+
 }

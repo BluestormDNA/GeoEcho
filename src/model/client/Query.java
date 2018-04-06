@@ -2,10 +2,7 @@
  * App GeoEcho (Projecte final M13-DAM al IOC)
  * Copyright (c) 2018 - Papaya Team
  */
-
 package model.client;
-
-import java.awt.geom.Point2D;
 
 /**
  * Classe abstracta Query que embolcalla les sol·licituds dels clients al servidor
@@ -13,21 +10,38 @@ import java.awt.geom.Point2D;
  */
 public abstract class Query extends Packet{
 
-    private Point2D.Float coordinates;
-
-    /**
-     * Getter coordinates
-     * @return Retorna les coordenades
-     */
-    public Point2D.Float getCoordinates() {
-        return coordinates;
-    }
+    private float coordX;
+    private float coordY;
     
     /**
-     * Setter coordinates
-     * @param coordinates Coordenades del ount
+     * Getter coordX
+     * @return Retorna les coordenades
      */
-    public void setCoordinates(Point2D.Float coordinates) {
-        this.coordinates = coordinates;
+    public float getCoordX() {
+        return coordX;
     }
+
+    /**
+     * Setter coordX
+     * @param coordX Coordenades del ount
+     */
+    public void setCoordX(float coordX) {
+        this.coordX = coordX;
+    }
+    /**
+     * Getter coordY
+     * @return Retorna les coordenades
+     */
+    public float getCoordY() {
+        return coordY;
+    }
+
+    /**
+     * Setter coordY
+     * @param coordY Coordenades del ount
+     */
+    public void setCoordY(float coordY) {
+        this.coordY = coordY;
+    }
+    
 }

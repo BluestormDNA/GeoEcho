@@ -11,6 +11,7 @@ import java.io.Serializable;
  * @author Dani Machado
  */
 public abstract class Packet implements Serializable{
+    
     private int sessionID;
 
     /**

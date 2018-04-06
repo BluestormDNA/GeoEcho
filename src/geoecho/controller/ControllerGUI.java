@@ -8,7 +8,7 @@ package geoecho.controller;
 import com.teamdev.jxmaps.MapViewOptions;
 import geoecho.view.GUIForm;
 import geoecho.view.MapPanel;
-import static helpers.Constants.ALL;
+import static helpers.Constants.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -44,6 +44,13 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
      */
     private void initializeListener() {
         gui.getjButtonLogout().addActionListener(this);
+        gui.getjButtonSearchUser().addActionListener(this);
+        gui.getjPanelBUser().addMouseListener(this);
+        gui.getjPanelBWorld().addMouseListener(this);
+        gui.getjPanelBStatistic().addMouseListener(this);
+        gui.getjPanelBConfig().addMouseListener(this);
+        gui.getjPanelBMarker().addMouseListener(this);
+        gui.getjPanelBPolyLine().addMouseListener(this);
     }
 
     /**
@@ -54,15 +61,10 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
-        try {
-            Logout logout = new Logout();
-            logout.setSessionID(net.getId());
-            if (net.sendPacket(logout)) {
-                ControllerLogin login = new ControllerLogin();
-                gui.dispose();
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(ControllerGUI.class.getName()).log(Level.SEVERE, null, ex);
+        if (ae.getSource().equals(gui.getjButtonLogout())) {
+            handleLogout();
+        } else if (ae.getSource().equals(gui.getjButtonSearchUser())) {
+            handleUserSearch();
         }
 
     }
@@ -81,9 +83,9 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
         } else if (evt.getSource().equals(gui.getjPanelBStatistic())) {
             handleStatisticsPanel();
         } else if (evt.getSource().equals(gui.getjPanelBConfig())) {
-            //TODO Habria que gestioanrlo con un boton save o algo y que pille labels
+            //Implementado via botones borrar esto
         } else if (evt.getSource().equals(gui.getjPanelBMarker())) {
-            handleMarkerPanel();
+            // Ha implementar via botones
         } else if (evt.getSource().equals(gui.getjPanelBPolyLine())) {
             //TODO boton enviar con el usuario que decida el textBox
         }
@@ -91,7 +93,9 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
 
     private void handleUserPanel() {
         ResponseQueryDesk me = net.getFromServer(net.getUser());
-
+        System.out.println(me);
+        System.out.println(me.getUserList());
+        System.out.println(me.getUserList().get(0));
         gui.getJlabelUser().setText(me.getUserList().get(0).getUsername());
         gui.getjLabelmail().setText(me.getUserList().get(0).getEmail());
     }
@@ -111,14 +115,47 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
 
     private void handleWorldPanel() {
         List messageList = net.getFromServer(ALL).getMessageList();
-
         MapViewOptions options = new MapViewOptions();
         options.importPlaces();
         gui.getjPanelWorld().add(new MapPanel(options, messageList));
     }
 
-    private void handleMarkerPanel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void handleLogout() {
+        try {
+            Logout logout = new Logout();
+            logout.setSessionID(net.getId());
+            if (net.sendPacket(logout)) {
+                ControllerLogin login = new ControllerLogin();
+                gui.dispose();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void handleUserSearch() {
+        gui.getjLabelUserServerInfo().setText(CLEAR);
+        gui.getjTextAreaUserMessages().setText(CLEAR);
+        
+        ResponseQueryDesk responseQueryDesk = net.getFromServer(gui.getjTextFieldSearchUser().getText());
+
+        if (responseQueryDesk == null) {
+            gui.getjLabelUserServerInfo().setText(USER_NOT_FOUND);
+        } else {
+            User user = responseQueryDesk.getUserList().get(0);
+            List<Message> messageList = responseQueryDesk.getMessageList();
+
+            gui.getjPanelUserInfo().setVisible(true);
+            gui.getjLabelUserInfoName().setText(user.getUsername());
+            gui.getjLabelUserInfoEmail().setText(user.getEmail());
+            gui.getjLabelUserInfoType().setText(user.isAdminuser() ? ADMIN : USER_BASE);
+            gui.getjLabelUserInfoTotalMessages().setText(String.valueOf(messageList.size()));
+            
+            for(Message m : messageList){
+            gui.getjTextAreaUserMessages().append(m.getText() + NEW_LINE);
+            }
+
+        }
     }
 
 }

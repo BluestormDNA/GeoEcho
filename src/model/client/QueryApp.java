@@ -6,7 +6,7 @@
 package model.client;
 
 /**
- * Classe abstracta QueryApp que embolcalla les sol·licituds dels client App al servidor
+ * Classe QueryApp que embolcalla les sol·licituds dels client App al servidor
  * @author Dani Machado
  */
 public class QueryApp extends Query{

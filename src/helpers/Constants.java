@@ -26,6 +26,11 @@ public class Constants {
     public final static String TITLE_MARKER= "Messages";
     public final static String TITLE_ROUTE = "Trace route";
     
+    //CONFIG
     public final static String ALL = "all";
+    public final static String USER_NOT_FOUND = "USER NOT FOUND !";
+    public final static String ADMIN = "Administrator";
+    public final static String USER_BASE = "Base User";
+    public final static String NEW_LINE = "\n";
 
 }

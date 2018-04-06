@@ -2,19 +2,20 @@
  * App GeoEcho (Projecte final M13-DAM al IOC)
  * Copyright (c) 2018 - Papaya Team
  */
-
 package model.client;
+
+import java.io.Serializable;
 
 /**
  * Classe User que conté el model de l'usuari del sistema
  * @author Dani Machado
  */
-public class User extends Packet{
-    protected String username;
-    protected String password;
-    protected String email;
-    protected boolean adminuser;
-    protected boolean banned;
+public class User implements Serializable{
+    private String username;
+    private String password;
+    private String email;
+    private boolean adminuser;
+    private boolean banned;
     
     /**
      * Constructor per defecte

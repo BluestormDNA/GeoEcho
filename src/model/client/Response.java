@@ -60,8 +60,26 @@ public class Response extends Packet{
      */
     public static final int LOGOUT_OK = 9;
     
+    /**
+     * Constant de MESSAGE_FAILED
+     */
+    public static final int MESSAGE_FAILED = 10;
+    
+    /**
+     * Constant de MESSAGE_OK
+     */
+    public static final int MESSAGE_OK = 11;
+    
+    /**
+     * Constant de SESSION_FAILED
+     */
+    public static final int SESSION_FAILED = 12;
+       
+    /**
+     * Atribut statusQuery
+     */
     private int statusQuery;
-
+    
     /**
      * Getter del satusQuery
      * @return retorna el codi d'estat de resposta

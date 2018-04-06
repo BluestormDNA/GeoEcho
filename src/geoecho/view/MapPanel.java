@@ -5,11 +5,8 @@
  */
 package geoecho.view;
 
-import com.teamdev.jxmaps.GeocoderCallback;
-import com.teamdev.jxmaps.GeocoderRequest;
-import com.teamdev.jxmaps.GeocoderResult;
-import com.teamdev.jxmaps.GeocoderStatus;
 import com.teamdev.jxmaps.InfoWindow;
+import com.teamdev.jxmaps.LatLng;
 import com.teamdev.jxmaps.Map;
 import com.teamdev.jxmaps.MapReadyHandler;
 import com.teamdev.jxmaps.MapStatus;
@@ -34,29 +31,25 @@ public class MapPanel extends MapView {
                 if (status == MapStatus.MAP_STATUS_OK) {
                     final Map map = getMap();
                     map.setZoom(5.0);
-                    GeocoderRequest request = new GeocoderRequest(map);
 
                     for (Message m : messageList) {
-                        request.setAddress(m.getCoordinates().x + " " + m.getCoordinates().y);
-                        getServices().getGeocoder().geocode(request, new GeocoderCallback(map) {
-                            @Override
-                            public void onComplete(GeocoderResult[] result, GeocoderStatus status) {
-                                if (status == GeocoderStatus.OK) {
-                                    map.setCenter(result[0].getGeometry().getLocation());
-                                    Marker marker = new Marker(map);
-                                    marker.setPosition(result[0].getGeometry().getLocation());
 
-                                    final InfoWindow window = new InfoWindow(map);
-                                    window.setContent(m.getText());
-                                    window.open(map, marker);
-                                    System.out.println("MAPA FINALIZADO CON EXITO");
-                                }
-                            }
-                        });
+                        System.out.println(m.getCoordY() + " " + m.getCoordX());
+                        LatLng pos = new LatLng(m.getCoordY(), m.getCoordX());
+
+                        map.setCenter(pos);
+                        Marker marker = new Marker(map);
+                        marker.setPosition(pos);
+
+                        final InfoWindow window = new InfoWindow(map);
+                        window.setContent(m.getUserSender() + " > " + m.getUserReceiver()
+                                + ": " + m.getText() + "\n" + m.getDate());
+                        window.open(map, marker);
+                        System.out.println("MAPA FINALIZADO CON EXITO");
                     }
-
                 }
             }
+
         });
     }
 }
