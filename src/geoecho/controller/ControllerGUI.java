@@ -8,14 +8,22 @@ package geoecho.controller;
 import com.teamdev.jxmaps.MapViewOptions;
 import geoecho.view.GUIForm;
 import geoecho.view.MapPanel;
+import geoecho.view.MapPanelPolyLine;
 import static helpers.Constants.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import model.client.*;
 import net.NetManager;
 
@@ -45,11 +53,10 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
     private void initializeListener() {
         gui.getjButtonLogout().addActionListener(this);
         gui.getjButtonSearchUser().addActionListener(this);
+        gui.getjButtonPolySearch().addActionListener(this);
         gui.getjPanelBUser().addMouseListener(this);
         gui.getjPanelBWorld().addMouseListener(this);
         gui.getjPanelBStatistic().addMouseListener(this);
-        gui.getjPanelBConfig().addMouseListener(this);
-        gui.getjPanelBMarker().addMouseListener(this);
         gui.getjPanelBPolyLine().addMouseListener(this);
     }
 
@@ -65,6 +72,8 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
             handleLogout();
         } else if (ae.getSource().equals(gui.getjButtonSearchUser())) {
             handleUserSearch();
+        } else if (ae.getSource().equals(gui.getjButtonPolySearch())) {
+            handlePolyLine();
         }
 
     }
@@ -82,12 +91,8 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
             handleUserPanel();
         } else if (evt.getSource().equals(gui.getjPanelBStatistic())) {
             handleStatisticsPanel();
-        } else if (evt.getSource().equals(gui.getjPanelBConfig())) {
-            //Implementado via botones borrar esto
-        } else if (evt.getSource().equals(gui.getjPanelBMarker())) {
-            // Ha implementar via botones
         } else if (evt.getSource().equals(gui.getjPanelBPolyLine())) {
-            //TODO boton enviar con el usuario que decida el textBox
+            initializePolyMap();
         }
     }
 
@@ -136,7 +141,10 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
     private void handleUserSearch() {
         gui.getjLabelUserServerInfo().setText(CLEAR);
         gui.getjTextAreaUserMessages().setText(CLEAR);
-        
+        for (JLabel l : gui.getjLabelPics()) {
+            l.setIcon(null);
+        }
+
         ResponseQueryDesk responseQueryDesk = net.getFromServer(gui.getjTextFieldSearchUser().getText());
 
         if (responseQueryDesk == null) {
@@ -144,17 +152,60 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
         } else {
             User user = responseQueryDesk.getUserList().get(0);
             List<Message> messageList = responseQueryDesk.getMessageList();
+            Collections.reverse(messageList);
 
             gui.getjPanelUserInfo().setVisible(true);
             gui.getjLabelUserInfoName().setText(user.getUsername());
+            System.out.println(user.getUsername());
             gui.getjLabelUserInfoEmail().setText(user.getEmail());
             gui.getjLabelUserInfoType().setText(user.isAdminuser() ? ADMIN : USER_BASE);
             gui.getjLabelUserInfoTotalMessages().setText(String.valueOf(messageList.size()));
-            
-            for(Message m : messageList){
-            gui.getjTextAreaUserMessages().append(m.getText() + NEW_LINE);
-            }
 
+            for (Message m : messageList) {
+                gui.getjTextAreaUserMessages().append(m.getText() + NEW_LINE);
+                if (m.getPhotoBase64() != null) {
+                    {
+                        for (JLabel l : gui.getjLabelPics()) {
+                            if (l.getIcon() == null) {
+                                l.setIcon(generateImage(m));
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void handlePolyLine() {
+        gui.getjLabelPolyInfoServer().setText(CLEAR);
+
+        ResponseQueryDesk responseQueryDesk = net.getFromServer(gui.getjTextFieldPoly().getText());
+
+        if (responseQueryDesk == null) {
+            gui.getjLabelPolyInfoServer().setText(USER_NOT_FOUND);
+        } else {
+            List<Message> messageList = responseQueryDesk.getMessageList();
+            MapPanelPolyLine map = (MapPanelPolyLine) gui.getjPanelPolyLineMap().getComponent(0);
+            map.generatePolyLine(messageList);
+        }
+
+    }
+
+    private Icon generateImage(Message m) {
+        BufferedImage image = null;
+        try {
+            byte[] btDataFile = new sun.misc.BASE64Decoder().decodeBuffer(m.getPhotoBase64());
+            image = ImageIO.read(new ByteArrayInputStream(btDataFile));
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return new ImageIcon(image.getScaledInstance(188, 104, 0));
+    }
+
+    private void initializePolyMap() {
+        if (gui.getjPanelPolyLineMap().getComponents().length == 0) {
+            gui.getjPanelPolyLineMap().add(new MapPanelPolyLine());
         }
     }
 

@@ -75,6 +75,11 @@ public class GUIForm extends javax.swing.JFrame {
         jLabelUserInfoTotalMessages = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaUserMessages = new javax.swing.JTextArea();
+        jLabelPic1 = new javax.swing.JLabel();
+        jLabelPic2 = new javax.swing.JLabel();
+        jLabelPic3 = new javax.swing.JLabel();
+        jLabelPic4 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
         jButtonSearchUser = new javax.swing.JButton();
         jTextFieldSearchUser = new javax.swing.JTextField();
         jLabelSearch = new javax.swing.JLabel();
@@ -92,6 +97,11 @@ public class GUIForm extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jPanelMarker = new javax.swing.JPanel();
         jPanelPolyline = new javax.swing.JPanel();
+        jLabelPolyInfoServer = new javax.swing.JLabel();
+        jButtonPolySearch = new javax.swing.JButton();
+        jTextFieldPoly = new javax.swing.JTextField();
+        jSeparator4 = new javax.swing.JSeparator();
+        jPanelPolyLineMap = new javax.swing.JPanel();
         jPanelUser = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
@@ -464,152 +474,93 @@ public class GUIForm extends javax.swing.JFrame {
 
         jPanelConfig.setPreferredSize(new java.awt.Dimension(750, 450));
         jPanelConfig.setVisible(false);
+        jPanelConfig.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelConfig.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 750, 10));
+
+        jPanelUserInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jToggleButtonBanUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jToggleButtonBanUser.setForeground(new java.awt.Color(255, 51, 51));
         jToggleButtonBanUser.setText("BAN USER");
+        jPanelUserInfo.add(jToggleButtonBanUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 330, -1, -1));
+        jPanelUserInfo.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 319, 752, 10));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("User name:");
+        jPanelUserInfo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 11, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Registered E-mail:");
+        jPanelUserInfo.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 11, -1, 14));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("User Type:");
+        jPanelUserInfo.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 34, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Total Messages:");
+        jPanelUserInfo.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 34, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel18.setText("Last Messages:");
+        jPanelUserInfo.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 69, -1, -1));
 
         jLabelUserInfoName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelUserInfoName.setText(" ");
         jLabelUserInfoName.setToolTipText("");
+        jPanelUserInfo.add(jLabelUserInfoName, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 11, 210, -1));
 
         jLabelUserInfoEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelUserInfoEmail.setText(" ");
         jLabelUserInfoEmail.setToolTipText("");
+        jPanelUserInfo.add(jLabelUserInfoEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(486, 11, 250, -1));
 
         jLabelUserInfoType.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelUserInfoType.setText(" ");
         jLabelUserInfoType.setToolTipText("");
+        jPanelUserInfo.add(jLabelUserInfoType, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 34, 210, -1));
 
         jLabelUserInfoTotalMessages.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelUserInfoTotalMessages.setText(" ");
         jLabelUserInfoTotalMessages.setToolTipText("");
+        jPanelUserInfo.add(jLabelUserInfoTotalMessages, new org.netbeans.lib.awtextra.AbsoluteConstraints(486, 34, 250, -1));
 
         jTextAreaUserMessages.setColumns(20);
         jTextAreaUserMessages.setRows(5);
         jScrollPane1.setViewportView(jTextAreaUserMessages);
 
-        javax.swing.GroupLayout jPanelUserInfoLayout = new javax.swing.GroupLayout(jPanelUserInfo);
-        jPanelUserInfo.setLayout(jPanelUserInfoLayout);
-        jPanelUserInfoLayout.setHorizontalGroup(
-            jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelUserInfoLayout.createSequentialGroup()
-                .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelUserInfoLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jToggleButtonBanUser))
-                    .addGroup(jPanelUserInfoLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel13)
-                                .addComponent(jLabel12)
-                                .addComponent(jLabel6)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUserInfoLayout.createSequentialGroup()
-                                    .addComponent(jLabel11)
-                                    .addGap(14, 14, 14)))
-                            .addGroup(jPanelUserInfoLayout.createSequentialGroup()
-                                .addComponent(jLabel18)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelUserInfoLayout.createSequentialGroup()
-                                .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabelUserInfoTotalMessages, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelUserInfoType, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelUserInfoName, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelUserInfoEmail, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1))))
-                .addContainerGap())
-            .addComponent(jSeparator3)
-        );
-        jPanelUserInfoLayout.setVerticalGroup(
-            jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUserInfoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabelUserInfoName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUserInfoEmail))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabelUserInfoType))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabelUserInfoTotalMessages))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelUserInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jToggleButtonBanUser)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanelUserInfo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 92, 314, 210));
+
+        jLabelPic1.setMaximumSize(new java.awt.Dimension(184, 100));
+        jPanelUserInfo.add(jLabelPic1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 92, 188, 104));
+
+        jLabelPic2.setMaximumSize(new java.awt.Dimension(184, 100));
+        jPanelUserInfo.add(jLabelPic2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 92, 188, 104));
+
+        jLabelPic3.setMaximumSize(new java.awt.Dimension(184, 100));
+        jPanelUserInfo.add(jLabelPic3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 198, 188, 104));
+
+        jLabelPic4.setMaximumSize(new java.awt.Dimension(184, 100));
+        jPanelUserInfo.add(jLabelPic4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 198, 188, 104));
+
+        jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel27.setText("Last Pictures:");
+        jPanelUserInfo.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 69, -1, -1));
+
+        jPanelConfig.add(jPanelUserInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, -1, 360));
 
         jButtonSearchUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonSearchUser.setText("Search");
+        jPanelConfig.add(jButtonSearchUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 20, -1, -1));
 
         jTextFieldSearchUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextFieldSearchUser.setText("User");
+        jPanelConfig.add(jTextFieldSearchUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 126, -1));
+        jPanelConfig.add(jLabelSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(431, 17, 141, -1));
 
         jLabelUserServerInfo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelUserServerInfo.setText(" ");
-
-        javax.swing.GroupLayout jPanelConfigLayout = new javax.swing.GroupLayout(jPanelConfig);
-        jPanelConfig.setLayout(jPanelConfigLayout);
-        jPanelConfigLayout.setHorizontalGroup(
-            jPanelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
-            .addComponent(jPanelUserInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConfigLayout.createSequentialGroup()
-                .addContainerGap(309, Short.MAX_VALUE)
-                .addGroup(jPanelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUserServerInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jTextFieldSearchUser, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonSearchUser)
-                .addContainerGap())
-        );
-        jPanelConfigLayout.setVerticalGroup(
-            jPanelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelConfigLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanelConfigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSearchUser)
-                    .addComponent(jTextFieldSearchUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelSearch)
-                    .addComponent(jLabelUserServerInfo))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanelUserInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(212, 212, 212))
-        );
+        jPanelConfig.add(jLabelUserServerInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 206, -1));
 
         jPanelWorld.setPreferredSize(new java.awt.Dimension(750, 450));
         jPanelWorld.setLayout(new java.awt.BorderLayout());
@@ -710,7 +661,49 @@ public class GUIForm extends javax.swing.JFrame {
         jPanelMarker.setLayout(new java.awt.BorderLayout());
 
         jPanelPolyline.setPreferredSize(new java.awt.Dimension(750, 450));
-        jPanelPolyline.setLayout(new java.awt.BorderLayout());
+        jPanelPolyline.setVisible(false);
+
+        jLabelPolyInfoServer.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelPolyInfoServer.setText(" ");
+
+        jButtonPolySearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonPolySearch.setText("Search");
+        jButtonPolySearch.setToolTipText("");
+
+        jTextFieldPoly.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldPoly.setText("User");
+
+        jPanelPolyLineMap.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout jPanelPolylineLayout = new javax.swing.GroupLayout(jPanelPolyline);
+        jPanelPolyline.setLayout(jPanelPolylineLayout);
+        jPanelPolylineLayout.setHorizontalGroup(
+            jPanelPolylineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPolylineLayout.createSequentialGroup()
+                .addContainerGap(365, Short.MAX_VALUE)
+                .addComponent(jLabelPolyInfoServer, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldPoly, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonPolySearch)
+                .addContainerGap())
+            .addComponent(jSeparator4)
+            .addComponent(jPanelPolyLineMap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanelPolylineLayout.setVerticalGroup(
+            jPanelPolylineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPolylineLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanelPolylineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPolyInfoServer)
+                    .addComponent(jButtonPolySearch)
+                    .addComponent(jTextFieldPoly, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelPolyLineMap, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         jPanelUser.setVisible(false);
 
@@ -774,7 +767,7 @@ public class GUIForm extends javax.swing.JFrame {
         jLayeredPane.setLayout(jLayeredPaneLayout);
         jLayeredPaneLayout.setHorizontalGroup(
             jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelConfig, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelConfig, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanelSplash, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -784,7 +777,7 @@ public class GUIForm extends javax.swing.JFrame {
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanelMarker, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelPolyline, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelPolyline, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE))
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPaneLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -793,7 +786,7 @@ public class GUIForm extends javax.swing.JFrame {
         );
         jLayeredPaneLayout.setVerticalGroup(
             jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelConfig, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelConfig, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanelSplash, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -803,7 +796,7 @@ public class GUIForm extends javax.swing.JFrame {
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanelMarker, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelPolyline, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelPolyline, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE))
             .addGroup(jLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPaneLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -941,6 +934,7 @@ public class GUIForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogout;
+    private javax.swing.JButton jButtonPolySearch;
     private javax.swing.JButton jButtonSearchUser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -957,6 +951,7 @@ public class GUIForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -967,6 +962,11 @@ public class GUIForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelIconoCerrar;
     private javax.swing.JLabel jLabelIconoMinimizar;
     private javax.swing.JLabel jLabelLogo;
+    private javax.swing.JLabel jLabelPic1;
+    private javax.swing.JLabel jLabelPic2;
+    private javax.swing.JLabel jLabelPic3;
+    private javax.swing.JLabel jLabelPic4;
+    private javax.swing.JLabel jLabelPolyInfoServer;
     private javax.swing.JLabel jLabelSearch;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelTotalMessageStatistics;
@@ -987,6 +987,7 @@ public class GUIForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelConfig;
     private javax.swing.JPanel jPanelLateral;
     private javax.swing.JPanel jPanelMarker;
+    private javax.swing.JPanel jPanelPolyLineMap;
     private javax.swing.JPanel jPanelPolyline;
     private javax.swing.JPanel jPanelSplash;
     private javax.swing.JPanel jPanelStadistics;
@@ -999,7 +1000,9 @@ public class GUIForm extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTextArea jTextAreaUserMessages;
+    private javax.swing.JTextField jTextFieldPoly;
     private javax.swing.JTextField jTextFieldSearchUser;
     private javax.swing.JToggleButton jToggleButtonBanUser;
     private javax.swing.JLabel jlabelUser;
@@ -1113,6 +1116,33 @@ public class GUIForm extends javax.swing.JFrame {
         return jTextAreaUserMessages;
     }
 
-    
+    public javax.swing.JPanel getjPanelPolyLine() {
+        return jPanelPolyline;
+    }
 
+    public javax.swing.JLabel[] getjLabelPics() {
+        return new javax.swing.JLabel[]{jLabelPic1, jLabelPic2, jLabelPic3, jLabelPic4};
+    }
+
+    public javax.swing.JButton getjButtonPolySearch() {
+        return jButtonPolySearch;
+    }
+
+    public javax.swing.JLabel getjLabelPolyInfoServer() {
+        return jLabelPolyInfoServer;
+    }
+
+    public javax.swing.JTextField getjTextFieldPoly() {
+        return jTextFieldPoly;
+    }
+
+    public void setjPanelPolyline(javax.swing.JPanel jPanelPolyline) {
+        this.jPanelPolyline = jPanelPolyline;
+    }
+
+    public javax.swing.JPanel getjPanelPolyLineMap() {
+        return jPanelPolyLineMap;
+    }
+
+    
 }

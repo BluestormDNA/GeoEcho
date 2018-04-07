@@ -33,4 +33,6 @@ public class Constants {
     public final static String USER_BASE = "Base User";
     public final static String NEW_LINE = "\n";
 
+    //HTML FORMATING POPUPS
+    public final static String PUBLIC = "<font color=\"blue\">PUBLIC</font>";
 }
