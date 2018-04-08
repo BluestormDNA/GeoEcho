@@ -5,12 +5,9 @@
  */
 package geoecho.view;
 
-import com.teamdev.jxmaps.Animation;
 import com.teamdev.jxmaps.InfoWindow;
-import com.teamdev.jxmaps.InfoWindowOptions;
 import com.teamdev.jxmaps.LatLng;
 import com.teamdev.jxmaps.Map;
-import com.teamdev.jxmaps.MapReadyHandler;
 import com.teamdev.jxmaps.MapStatus;
 import com.teamdev.jxmaps.MapViewOptions;
 import com.teamdev.jxmaps.Marker;
@@ -21,10 +18,15 @@ import model.client.Message;
 
 /**
  *
- * @author BlueStorm
+ * @author Pedro Cortes
  */
 public class MapPanel extends MapView {
-
+    
+    /**
+     * Carga un mapa del mundo con todos los mensajes de la lista pasada como parametro
+     * @param options Opciones del mapa
+     * @param messageList Lista de mensajes a cargar
+     */
     public MapPanel(MapViewOptions options, List<Message> messageList) {
         super(options);
         setOnMapReadyHandler((MapStatus status) -> {
@@ -47,7 +49,6 @@ public class MapPanel extends MapView {
                     window.open(map, marker);
                 }
             }
-            System.out.println("MAPA FINALIZADO CON EXITO");
         });
     }
 }

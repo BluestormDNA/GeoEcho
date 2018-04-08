@@ -16,10 +16,17 @@ import com.teamdev.jxmaps.swing.MapView;
 import model.client.Message;
 import java.util.List;
 
+/**
+ *
+ * @author Pedro Cortes
+ */
 public class MapPanelPolyLine extends MapView {
 
     Map map;
 
+    /**
+     * Genera un mapa de Google Maps por defecto
+     */
     public MapPanelPolyLine() {
         setOnMapReadyHandler(new MapReadyHandler() {
             @Override
@@ -35,7 +42,7 @@ public class MapPanelPolyLine extends MapView {
                     // Setting map options
                     map.setOptions(mapOptions);
                     // Setting the map center
-                    //map.setCenter(new LatLng(40, 24));
+                    //map.setCenter(new LatLng(lat, lng)));
                     // Setting initial zoom value
                     map.setZoom(5.0);
                 }
@@ -44,6 +51,11 @@ public class MapPanelPolyLine extends MapView {
 
     }
 
+    /**
+     * Genera una ruta en base a la localizacion de los mensajes de la lista
+     * @param messageList Lista de mensajes base
+     * @return Array LatLang con las coordenadas del trazado
+     */
     private LatLng[] generatePath(List<Message> messageList) {
         LatLng[] latlng = new LatLng[messageList.size()];
         for (int i = 0; i < messageList.size(); i++) {
@@ -60,6 +72,10 @@ public class MapPanelPolyLine extends MapView {
         return latlng;
     }
 
+    /**
+     * Genera una linea en el mapa en base a una lista de mensajes
+     * @param messageList Lista de mensajes
+     */
     public void generatePolyLine(List<Message> messageList) {
         map.setZoom(14.0);
         // Creating a path (array of coordinates) that represents a polyline

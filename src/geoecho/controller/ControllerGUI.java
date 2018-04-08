@@ -96,15 +96,21 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
         }
     }
 
+    /**
+     * Pide los datos al servidor del usuario actual y actualiza el panel de 
+     * usuario con los datos a mostrar
+     */
     private void handleUserPanel() {
         ResponseQueryDesk me = net.getFromServer(net.getUser());
-        System.out.println(me);
-        System.out.println(me.getUserList());
-        System.out.println(me.getUserList().get(0));
+
         gui.getJlabelUser().setText(me.getUserList().get(0).getUsername());
         gui.getjLabelmail().setText(me.getUserList().get(0).getEmail());
     }
 
+    /**
+     * Pide los datos al servidor de todos los usuarios y cuenta las listas
+     * actualizando los datos del panel
+     */
     private void handleStatisticsPanel() {
         ResponseQueryDesk responseQueryDesk = net.getFromServer(ALL);
 
@@ -118,6 +124,10 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
         gui.getjLabelTotalUserStatistics().setText(userCounter);
     }
 
+    /**
+     * Pide al servidor una lista de mensajes de todos los usuarios y genera
+     * un mapa con estos.
+     */
     private void handleWorldPanel() {
         List messageList = net.getFromServer(ALL).getMessageList();
         MapViewOptions options = new MapViewOptions();
@@ -125,6 +135,9 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
         gui.getjPanelWorld().add(new MapPanel(options, messageList));
     }
 
+    /**
+     * Desloguea al usuario y vuelve a ejecutar el form login
+     */
     private void handleLogout() {
         try {
             Logout logout = new Logout();
@@ -138,18 +151,25 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
         }
     }
 
+    /**
+     * Actualiza la UI de la busqueda de usuario:
+     * Limpiando las labels, texto y fotografías si las hubiera, pidiendo los
+     * datos al servidor y actualizando el panel
+     */
     private void handleUserSearch() {
+        //Limpia la UI
         gui.getjLabelUserServerInfo().setText(CLEAR);
         gui.getjTextAreaUserMessages().setText(CLEAR);
         for (JLabel l : gui.getjLabelPics()) {
             l.setIcon(null);
         }
-
+        // Pide al servidor los datos
         ResponseQueryDesk responseQueryDesk = net.getFromServer(gui.getjTextFieldSearchUser().getText());
-
+        // Comprueba los datos del servidor, si no son validos avisa
         if (responseQueryDesk == null) {
             gui.getjLabelUserServerInfo().setText(USER_NOT_FOUND);
         } else {
+            //Actualiza la vista del panel con los datos
             User user = responseQueryDesk.getUserList().get(0);
             List<Message> messageList = responseQueryDesk.getMessageList();
             Collections.reverse(messageList);
@@ -177,6 +197,10 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
         }
     }
 
+    /**
+     * Pide los datos al servidor y genera un mapa con el trazado de los mensajes
+     * del usuario
+     */
     private void handlePolyLine() {
         gui.getjLabelPolyInfoServer().setText(CLEAR);
 
@@ -192,6 +216,12 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
 
     }
 
+    /**
+     * Genera un Icono para un JLabel partiendo del codigo Base64 de un Mensaje
+     * reescalando la imagen resultante
+     * @param m Objeto mensaje del que sacar la imagen Base64
+     * @return Icono para JLabel
+     */
     private Icon generateImage(Message m) {
         BufferedImage image = null;
         try {
@@ -203,6 +233,9 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
         return new ImageIcon(image.getScaledInstance(188, 104, 0));
     }
 
+    /**
+     * Inicializa el Mapa a usar en el trazado de rutas
+     */
     private void initializePolyMap() {
         if (gui.getjPanelPolyLineMap().getComponents().length == 0) {
             gui.getjPanelPolyLineMap().add(new MapPanelPolyLine());

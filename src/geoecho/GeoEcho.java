@@ -23,6 +23,9 @@ public class GeoEcho {
         start();
     }
 
+    /**
+     * Define el look windows para la UI
+     */
     private static void defineWindowsLook() {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

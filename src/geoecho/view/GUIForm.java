@@ -869,7 +869,10 @@ public class GUIForm extends javax.swing.JFrame {
             this.jLayeredPane.moveToFront(jPanelPolyline);
         }
     }//GEN-LAST:event_jPanelMouseReleased
-
+    
+    /**
+     * Oculta todos los paneles
+     */
     private void ocultarPaneles(){
         this.jPanelSplash.setVisible(false);
         this.jPanelWorld.setVisible(false);

@@ -104,12 +104,22 @@ public class NetManager {
         return handled;
     }
 
+    /**
+     * Retorna un paquete de la URL especificada
+     * @return Packet
+     * @throws IOException 
+     */
     public Packet getPacket() throws IOException {
         URL url = new URL(URL);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         return getResponse(con);
     }
 
+    /**
+     * Genera un ResponseQueryDesk del servidor
+     * @param user Usuario a buscar especifico o ALL
+     * @return ResponseQueryDesk con los datos del usuario pedido
+     */
     public ResponseQueryDesk getFromServer(String user) {
         ResponseQueryDesk responsePacket = null;
         QueryDesk queryDesk = new QueryDesk();
@@ -125,6 +135,11 @@ public class NetManager {
         return responsePacket;
     }
 
+    /**
+     * Inicializa las credenciales una vez logueado
+     * @param id SessionID pasado por el server
+     * @param user Nombre de usuario local
+     */
     public void initializeCredential(int id, String user) {
         this.id = id;
         this.user = user;
