@@ -96,6 +96,11 @@ public class GUIForm extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jPanelMarker = new javax.swing.JPanel();
+        jPanelMapSender = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextAreaSender = new javax.swing.JTextArea();
+        jLabel23 = new javax.swing.JLabel();
         jPanelPolyline = new javax.swing.JPanel();
         jLabelPolyInfoServer = new javax.swing.JLabel();
         jButtonPolySearch = new javax.swing.JButton();
@@ -611,7 +616,7 @@ public class GUIForm extends javax.swing.JFrame {
                     .addGroup(jPanelStadisticsLayout.createSequentialGroup()
                         .addGap(135, 135, 135)
                         .addComponent(jLabel14)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 271, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanelStadisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelStadisticsLayout.createSequentialGroup()
@@ -654,11 +659,47 @@ public class GUIForm extends javax.swing.JFrame {
                         .addComponent(jLabel19)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel20)))
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         jPanelMarker.setPreferredSize(new java.awt.Dimension(750, 450));
-        jPanelMarker.setLayout(new java.awt.BorderLayout());
+        jPanelMarker.setVisible(false);
+        jPanelMarker.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanelMapSender.setLayout(new java.awt.BorderLayout());
+        jPanelMarker.add(jPanelMapSender, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 450));
+
+        jTextAreaSender.setColumns(20);
+        jTextAreaSender.setRows(5);
+        jScrollPane2.setViewportView(jTextAreaSender);
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel23.setText("PUBLIC MESSAGE SENDER");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel23)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(101, Short.MAX_VALUE))
+        );
+
+        jPanelMarker.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 230, 450));
 
         jPanelPolyline.setPreferredSize(new java.awt.Dimension(750, 450));
         jPanelPolyline.setVisible(false);
@@ -954,6 +995,7 @@ public class GUIForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -981,6 +1023,7 @@ public class GUIForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelUserServerInfo;
     private javax.swing.JLabel jLabelmail;
     private javax.swing.JLayeredPane jLayeredPane;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelBConfig;
     private javax.swing.JPanel jPanelBMarker;
     private javax.swing.JPanel jPanelBPolyLine;
@@ -989,6 +1032,7 @@ public class GUIForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelBWorld;
     private javax.swing.JPanel jPanelConfig;
     private javax.swing.JPanel jPanelLateral;
+    private javax.swing.JPanel jPanelMapSender;
     private javax.swing.JPanel jPanelMarker;
     private javax.swing.JPanel jPanelPolyLineMap;
     private javax.swing.JPanel jPanelPolyline;
@@ -1000,10 +1044,12 @@ public class GUIForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelUserInfo;
     private javax.swing.JPanel jPanelWorld;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JTextArea jTextAreaSender;
     private javax.swing.JTextArea jTextAreaUserMessages;
     private javax.swing.JTextField jTextFieldPoly;
     private javax.swing.JTextField jTextFieldSearchUser;
@@ -1145,6 +1191,14 @@ public class GUIForm extends javax.swing.JFrame {
 
     public javax.swing.JPanel getjPanelPolyLineMap() {
         return jPanelPolyLineMap;
+    }
+
+    public javax.swing.JPanel getjPanelMapSender() {
+        return jPanelMapSender;
+    }
+
+    public javax.swing.JTextArea getjTextAreaSender() {
+        return jTextAreaSender;
     }
 
     

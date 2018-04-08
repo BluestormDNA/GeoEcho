@@ -12,9 +12,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.client.LoginDesk;
+import model.client.Message;
 import model.client.QueryDesk;
 import model.client.ResponseQueryDesk;
 
@@ -26,8 +30,7 @@ public class NetManager {
 
     private final String URL = "http://ec2-52-31-205-76.eu-west-1.compute.amazonaws.com/geoechoserv";
     private final int OK = 200;
-    
-    
+
     private String user;
     private int id;
 
@@ -105,9 +108,28 @@ public class NetManager {
     }
 
     /**
+     * Envia un mensaje con la latitud, longitud y texto definidos
+     * @param x longitud
+     * @param y latitud
+     * @param text mensaje
+     */
+    public void SendMessage(double x, double y, String text) {
+        Message m = new Message((float)x, (float)y, text, null, user, null, new Date(), 10, true, true, false);
+        m.setSessionID(id);
+        
+        try {
+            sendPacket(m);
+        } catch (IOException ex) {
+            Logger.getLogger(NetManager.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("NO SE HA PODIDO ENVIAR EL MENSAJE");
+        }
+    }
+
+    /**
      * Retorna un paquete de la URL especificada
+     *
      * @return Packet
-     * @throws IOException 
+     * @throws IOException
      */
     public Packet getPacket() throws IOException {
         URL url = new URL(URL);
@@ -117,6 +139,7 @@ public class NetManager {
 
     /**
      * Genera un ResponseQueryDesk del servidor
+     *
      * @param user Usuario a buscar especifico o ALL
      * @return ResponseQueryDesk con los datos del usuario pedido
      */
@@ -137,6 +160,7 @@ public class NetManager {
 
     /**
      * Inicializa las credenciales una vez logueado
+     *
      * @param id SessionID pasado por el server
      * @param user Nombre de usuario local
      */

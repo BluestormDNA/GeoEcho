@@ -8,6 +8,7 @@ package geoecho.controller;
 import com.teamdev.jxmaps.MapViewOptions;
 import geoecho.view.GUIForm;
 import geoecho.view.MapPanel;
+import geoecho.view.MapPanelMarker;
 import geoecho.view.MapPanelPolyLine;
 import static helpers.Constants.*;
 import java.awt.event.ActionEvent;
@@ -58,6 +59,7 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
         gui.getjPanelBWorld().addMouseListener(this);
         gui.getjPanelBStatistic().addMouseListener(this);
         gui.getjPanelBPolyLine().addMouseListener(this);
+        gui.getjPanelBMarker().addMouseListener(this);
     }
 
     /**
@@ -75,7 +77,6 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
         } else if (ae.getSource().equals(gui.getjButtonPolySearch())) {
             handlePolyLine();
         }
-
     }
 
     /**
@@ -93,11 +94,13 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
             handleStatisticsPanel();
         } else if (evt.getSource().equals(gui.getjPanelBPolyLine())) {
             initializePolyMap();
+        } else if (evt.getSource().equals((gui.getjPanelBMarker()))) {
+            initializeMarkerMap();
         }
     }
 
     /**
-     * Pide los datos al servidor del usuario actual y actualiza el panel de 
+     * Pide los datos al servidor del usuario actual y actualiza el panel de
      * usuario con los datos a mostrar
      */
     private void handleUserPanel() {
@@ -125,8 +128,8 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
     }
 
     /**
-     * Pide al servidor una lista de mensajes de todos los usuarios y genera
-     * un mapa con estos.
+     * Pide al servidor una lista de mensajes de todos los usuarios y genera un
+     * mapa con estos.
      */
     private void handleWorldPanel() {
         List messageList = net.getFromServer(ALL).getMessageList();
@@ -152,9 +155,9 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
     }
 
     /**
-     * Actualiza la UI de la busqueda de usuario:
-     * Limpiando las labels, texto y fotografías si las hubiera, pidiendo los
-     * datos al servidor y actualizando el panel
+     * Actualiza la UI de la busqueda de usuario: Limpiando las labels, texto y
+     * fotografías si las hubiera, pidiendo los datos al servidor y actualizando
+     * el panel
      */
     private void handleUserSearch() {
         //Limpia la UI
@@ -198,8 +201,8 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
     }
 
     /**
-     * Pide los datos al servidor y genera un mapa con el trazado de los mensajes
-     * del usuario
+     * Pide los datos al servidor y genera un mapa con el trazado de los
+     * mensajes del usuario
      */
     private void handlePolyLine() {
         gui.getjLabelPolyInfoServer().setText(CLEAR);
@@ -219,6 +222,7 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
     /**
      * Genera un Icono para un JLabel partiendo del codigo Base64 de un Mensaje
      * reescalando la imagen resultante
+     *
      * @param m Objeto mensaje del que sacar la imagen Base64
      * @return Icono para JLabel
      */
@@ -239,6 +243,15 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
     private void initializePolyMap() {
         if (gui.getjPanelPolyLineMap().getComponents().length == 0) {
             gui.getjPanelPolyLineMap().add(new MapPanelPolyLine());
+        }
+    }
+
+    /**
+     * Inicializa el Mapa a usar en el emisor de mensajes
+     */
+    private void initializeMarkerMap() {
+        if (gui.getjPanelMapSender().getComponents().length == 0) {
+            gui.getjPanelMapSender().add(new MapPanelMarker(net, gui.getjTextAreaSender()));
         }
     }
 
