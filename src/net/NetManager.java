@@ -40,7 +40,7 @@ public class NetManager {
 
     private URL url;
 
-    public NetManager() throws MalformedURLException {
+    public NetManager(){
         try {
             // Creamos un gestor de Certificados válidos
             TrustManager[] trustAllCerts = new TrustManager[]{new NetTrustManager()};
@@ -61,7 +61,7 @@ public class NetManager {
             // Creamos el objeto URL
             url = new URL(URL);
 
-        } catch (KeyManagementException | NoSuchAlgorithmException ex) {
+        } catch (KeyManagementException | NoSuchAlgorithmException | MalformedURLException ex) {
             Logger.getLogger(NetManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -162,21 +162,21 @@ public class NetManager {
      *
      * @param user Usuario a buscar especifico o ALL
      * @return ResponseQueryDesk con los datos del usuario pedido
-     * @throws java.io.IOException
      */
-    public ResponseQueryDesk getFromServer(String user) throws IOException {
-        HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+    public ResponseQueryDesk getFromServer(String user) {
         ResponseQueryDesk responsePacket = null;
         QueryDesk queryDesk = new QueryDesk();
         queryDesk.setSessionID(id);
         queryDesk.setUsername(user);
+        
         try {
+            HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
             if (sendPacket(queryDesk)) {
                 System.out.println("inside");
                 responsePacket = (ResponseQueryDesk) getPacket(con);
             }
         } catch (IOException ex) {
-            System.out.println("FAILED TO GET FROM SERVER"); //PASAARLO A LABEL???
+            Logger.getLogger(NetManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return responsePacket;
     }

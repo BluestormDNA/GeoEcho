@@ -24,11 +24,9 @@ public class MapPanel extends MapView {
     
     /**
      * Carga un mapa del mundo con todos los mensajes de la lista pasada como parametro
-     * @param options Opciones del mapa
      * @param messageList Lista de mensajes a cargar
      */
-    public MapPanel(MapViewOptions options, List<Message> messageList) {
-        super(options);
+    public MapPanel(List<Message> messageList) {
         setOnMapReadyHandler((MapStatus status) -> {
             System.out.println("MAPA LISTO");
             if (status == MapStatus.MAP_STATUS_OK) {

@@ -5,7 +5,6 @@
  */
 package geoecho.controller;
 
-import com.teamdev.jxmaps.MapViewOptions;
 import geoecho.view.GUIForm;
 import geoecho.view.MapPanel;
 import geoecho.view.MapPanelMarker;
@@ -139,11 +138,11 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
      */
     private void handleWorldPanel() {
         List messageList = net.getFromServer(ALL).getMessageList();
-        MapViewOptions options = new MapViewOptions();
-        options.importPlaces();
-        MapPanel map = new MapPanel(options, messageList);
-        gui.getjPanelWorld().add(map);
-        gui.getjPanelWorld().validate();
+
+        if (gui.getjPanelWorld().getComponents().length == 0) {
+            gui.getjPanelWorld().add(new MapPanel(messageList));
+            gui.getjPanelWorld().validate();
+        }
     }
 
     /**
@@ -156,9 +155,11 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
             if (net.sendPacket(logout)) {
                 ControllerLogin login = new ControllerLogin();
                 gui.dispose();
+
             }
         } catch (IOException ex) {
-            Logger.getLogger(ControllerGUI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControllerGUI.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -239,8 +240,10 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
         try {
             byte[] btDataFile = new sun.misc.BASE64Decoder().decodeBuffer(m.getPhotoBase64());
             image = ImageIO.read(new ByteArrayInputStream(btDataFile));
+
         } catch (IOException ex) {
-            Logger.getLogger(ControllerGUI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControllerGUI.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return new ImageIcon(image.getScaledInstance(188, 104, 0));
     }
