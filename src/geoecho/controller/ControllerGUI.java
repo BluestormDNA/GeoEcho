@@ -138,10 +138,13 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
      */
     private void handleWorldPanel() {
         List messageList = net.getFromServer(ALL).getMessageList();
-
         if (gui.getjPanelWorld().getComponents().length == 0) {
-            gui.getjPanelWorld().add(new MapPanel(messageList));
+            MapPanel map = new MapPanel(messageList);
+            gui.getjPanelWorld().add(map);
             gui.getjPanelWorld().validate();
+        } else {
+            MapPanel map = (MapPanel) gui.getjPanelWorld().getComponent(0);
+            map.update(messageList);
         }
     }
 
