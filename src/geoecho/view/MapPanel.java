@@ -9,7 +9,6 @@ import com.teamdev.jxmaps.InfoWindow;
 import com.teamdev.jxmaps.LatLng;
 import com.teamdev.jxmaps.Map;
 import com.teamdev.jxmaps.MapStatus;
-import com.teamdev.jxmaps.MapViewOptions;
 import com.teamdev.jxmaps.Marker;
 import com.teamdev.jxmaps.swing.MapView;
 import static helpers.Constants.PUBLIC;
@@ -42,6 +41,12 @@ public class MapPanel extends MapView {
         });
     }
 
+    /**
+     * Actualiza en el mapa todos los mensajes pasados como parametro
+     * Formateados si son publicos o privados, usuario emisor y receptor
+     * seguido del mensaje en su ubicacion según LatLng
+     * @param messageList 
+     */
     public void update(List<Message> messageList) {
         for (Message m : messageList) {
             LatLng pos = new LatLng(m.getCoordY(), m.getCoordX());
