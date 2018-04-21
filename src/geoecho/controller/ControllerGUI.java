@@ -70,13 +70,16 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource().equals(gui.getjButtonLogout())) {
-            handleLogout();
-        } else if (ae.getSource().equals(gui.getjButtonSearchUser())) {
-            handleUserSearch();
-        } else if (ae.getSource().equals(gui.getjButtonPolySearch())) {
-            handlePolyLine();
-        }
+        Thread thread = new Thread(() -> {
+            if (ae.getSource().equals(gui.getjButtonLogout())) {
+                handleLogout();
+            } else if (ae.getSource().equals(gui.getjButtonSearchUser())) {
+                handleUserSearch();
+            } else if (ae.getSource().equals(gui.getjButtonPolySearch())) {
+                handlePolyLine();
+            }
+        });
+        thread.start();
     }
 
     /**
@@ -86,17 +89,20 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
      */
     @Override
     public void mouseClicked(java.awt.event.MouseEvent evt) {
-        if (evt.getSource().equals(gui.getjPanelBWorld())) {
-            handleWorldPanel();
-        } else if (evt.getSource().equals(gui.getjPanelBUser())) {
-            handleUserPanel();
-        } else if (evt.getSource().equals(gui.getjPanelBStatistic())) {
-            handleStatisticsPanel();
-        } else if (evt.getSource().equals(gui.getjPanelBPolyLine())) {
-            initializePolyMap();
-        } else if (evt.getSource().equals((gui.getjPanelBMarker()))) {
-            initializeMarkerMap();
-        }
+        Thread thread = new Thread(() -> {
+            if (evt.getSource().equals(gui.getjPanelBWorld())) {
+                handleWorldPanel();
+            } else if (evt.getSource().equals(gui.getjPanelBUser())) {
+                handleUserPanel();
+            } else if (evt.getSource().equals(gui.getjPanelBStatistic())) {
+                handleStatisticsPanel();
+            } else if (evt.getSource().equals(gui.getjPanelBPolyLine())) {
+                initializePolyMap();
+            } else if (evt.getSource().equals((gui.getjPanelBMarker()))) {
+                initializeMarkerMap();
+            }
+        });
+        thread.start();
     }
 
     /**
@@ -135,7 +141,9 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
         List messageList = net.getFromServer(ALL).getMessageList();
         MapViewOptions options = new MapViewOptions();
         options.importPlaces();
-        gui.getjPanelWorld().add(new MapPanel(options, messageList));
+        MapPanel map = new MapPanel(options, messageList);
+        gui.getjPanelWorld().add(map);
+        gui.getjPanelWorld().validate();
     }
 
     /**
@@ -243,6 +251,7 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
     private void initializePolyMap() {
         if (gui.getjPanelPolyLineMap().getComponents().length == 0) {
             gui.getjPanelPolyLineMap().add(new MapPanelPolyLine());
+            gui.getjPanelPolyLineMap().validate();
         }
     }
 
@@ -252,6 +261,7 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
     private void initializeMarkerMap() {
         if (gui.getjPanelMapSender().getComponents().length == 0) {
             gui.getjPanelMapSender().add(new MapPanelMarker(net, gui.getjTextAreaSender()));
+            gui.getjPanelMapSender().validate();
         }
     }
 

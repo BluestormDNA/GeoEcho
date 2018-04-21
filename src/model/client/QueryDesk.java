@@ -6,7 +6,7 @@
 package model.client;
 
 /**
- * Classe abstracta QueryDesk que embolcalla les sol·licituds dels client Desk al servidor
+ * Classe QueryDesk que embolcalla les sol·licituds dels client Desk al servidor
  * @author Dani Machado
  */
 public class QueryDesk extends Query{

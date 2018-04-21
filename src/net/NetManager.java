@@ -5,21 +5,26 @@
  */
 package net;
 
-import model.client.Packet;
-import model.client.Response;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
 import model.client.LoginDesk;
 import model.client.Message;
+import model.client.Packet;
 import model.client.QueryDesk;
+import model.client.Response;
 import model.client.ResponseQueryDesk;
 
 /**
@@ -28,11 +33,38 @@ import model.client.ResponseQueryDesk;
  */
 public class NetManager {
 
-    private final String URL = "http://ec2-52-31-205-76.eu-west-1.compute.amazonaws.com/geoechoserv";
-    private final int OK = 200;
+    private final String URL = "https://ec2-52-31-205-76.eu-west-1.compute.amazonaws.com:8443/geoechoserv";
 
     private String user;
     private int id;
+
+    private URL url;
+
+    public NetManager() throws MalformedURLException {
+        try {
+            // Creamos un gestor de Certificados válidos
+            TrustManager[] trustAllCerts = new TrustManager[]{new NetTrustManager()};
+
+            // Añadimos el gestor de certificados válidos al contexto SSL
+            SSLContext sc = SSLContext.getInstance("TLSv1.2");
+            sc.init(null, trustAllCerts, new java.security.SecureRandom());
+
+            // Obtenemos el creador de sockets SSL y lo añadimos al HttpsURLConnection
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+
+            // Verificamos todos los hostnames
+            HostnameVerifier allHostsValid = (String hostname, SSLSession session) -> true;
+
+            // Los añadimos en el HttpsURLConnection
+            HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+
+            // Creamos el objeto URL
+            url = new URL(URL);
+
+        } catch (KeyManagementException | NoSuchAlgorithmException ex) {
+            Logger.getLogger(NetManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * Envía un objeto del tipo Packet via post
@@ -42,14 +74,12 @@ public class NetManager {
      * @return int con el Response Code del envío post http
      * @throws IOException
      */
-    public int sendPost(HttpURLConnection con, Packet packet) throws IOException {
+    public int sendPost(HttpsURLConnection con, Packet packet) throws IOException {
         con.setRequestMethod("POST");
         con.setDoOutput(true);
-
         try (ObjectOutputStream out = new ObjectOutputStream(con.getOutputStream())) {
             out.writeObject(packet);
         }
-
         return con.getResponseCode();
     }
 
@@ -60,11 +90,12 @@ public class NetManager {
      * @return Packet procedente del servidor
      * @throws IOException
      */
-    private Packet getResponse(HttpURLConnection con) throws IOException {
+    private Packet getPacket(HttpsURLConnection con) throws IOException {
         Packet packet = null;
 
         try (ObjectInputStream in = new ObjectInputStream(con.getInputStream())) {
             packet = (Packet) in.readObject();
+            System.out.println("RECEIVED ");
         } catch (ClassNotFoundException e) {
             Logger.getLogger(NetManager.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -80,11 +111,10 @@ public class NetManager {
      */
     public int handleLogin(LoginDesk loginDesk) throws IOException {
         int id = 0;
-        URL url = new URL(URL);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 
-        if (sendPost(con, loginDesk) == OK) {
-            Response login = (Response) getResponse(con);
+        if (sendPost(con, loginDesk) == HttpsURLConnection.HTTP_OK) {
+            Response login = (Response) getPacket(con);
             id = login.getSessionID();
         }
         return id;
@@ -99,9 +129,10 @@ public class NetManager {
      */
     public boolean sendPacket(Packet packet) throws IOException {
         boolean handled = false;
-        URL url = new URL(URL);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        if (sendPost(con, packet) == OK) {
+        HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+
+        if (sendPost(con, packet) == HttpsURLConnection.HTTP_OK) {
+            System.out.println("SEND PACKET OK");
             handled = true;
         }
         return handled;
@@ -109,14 +140,15 @@ public class NetManager {
 
     /**
      * Envia un mensaje con la latitud, longitud y texto definidos
+     *
      * @param x longitud
      * @param y latitud
      * @param text mensaje
      */
     public void SendMessage(double x, double y, String text) {
-        Message m = new Message((float)x, (float)y, text, null, user, null, new Date(), 10, true, true, false);
+        Message m = new Message((float) x, (float) y, text, null, user, null, new Date(), 10, true, true, false);
         m.setSessionID(id);
-        
+
         try {
             sendPacket(m);
         } catch (IOException ex) {
@@ -126,31 +158,22 @@ public class NetManager {
     }
 
     /**
-     * Retorna un paquete de la URL especificada
-     *
-     * @return Packet
-     * @throws IOException
-     */
-    public Packet getPacket() throws IOException {
-        URL url = new URL(URL);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        return getResponse(con);
-    }
-
-    /**
      * Genera un ResponseQueryDesk del servidor
      *
      * @param user Usuario a buscar especifico o ALL
      * @return ResponseQueryDesk con los datos del usuario pedido
+     * @throws java.io.IOException
      */
-    public ResponseQueryDesk getFromServer(String user) {
+    public ResponseQueryDesk getFromServer(String user) throws IOException {
+        HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
         ResponseQueryDesk responsePacket = null;
         QueryDesk queryDesk = new QueryDesk();
         queryDesk.setSessionID(id);
         queryDesk.setUsername(user);
         try {
             if (sendPacket(queryDesk)) {
-                responsePacket = (ResponseQueryDesk) getPacket();
+                System.out.println("inside");
+                responsePacket = (ResponseQueryDesk) getPacket(con);
             }
         } catch (IOException ex) {
             System.out.println("FAILED TO GET FROM SERVER"); //PASAARLO A LABEL???

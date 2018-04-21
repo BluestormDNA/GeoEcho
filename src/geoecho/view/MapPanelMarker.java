@@ -38,15 +38,17 @@ public class MapPanelMarker extends MapView {
                     // Setting map options
                     map.setOptions(options);
                     // Setting the map center
-                    map.setCenter(new LatLng(41.38, 2.17));
+                    map.setCenter(new LatLng(41.385, 2.175));
                     // Setting initial zoom value
                     map.setZoom(9.0);
                     // Creating a new marker object
-                    Marker marker = new Marker(map);
+                    //Marker marker = new Marker(map);
                     // Setting marker position
-                    marker.setPosition(map.getCenter());
+                    //marker.setPosition(map.getCenter());
                     // Creating info window, that will be initially displayed on the marker
                     final InfoWindow infoWindow = new InfoWindow(map);
+                    
+                    System.out.println("MAP PANEL MARKER CARGADO");
 
                     // Adding event listener that intercepts clicking on map
                     map.addEventListener("click", new MapMouseEvent() {
