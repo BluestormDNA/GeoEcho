@@ -16,8 +16,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -125,11 +130,27 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
         List<Message> messageList = responseQueryDesk.getMessageList();
         List<User> userList = responseQueryDesk.getUserList();
 
-        String msgCounter = String.valueOf(messageList.size());
-        String userCounter = String.valueOf(userList.size());
+        //24H
+        int msgCounterLast24H = 0;
+        int userCounterLast24H;
 
-        gui.getjLabelTotalMessageStatistics().setText(msgCounter);
-        gui.getjLabelTotalUserStatistics().setText(userCounter);
+        Calendar cal = Calendar.getInstance();
+        cal.roll(Calendar.DATE, -1);
+
+        Set set = new HashSet();
+        for (Message m : messageList) {
+            if (m.getDate().after(cal.getTime())) {
+                msgCounterLast24H++;
+                set.add(m.getUserSender());
+            }
+        }
+        userCounterLast24H = set.size();
+        
+        gui.getjLabelTotalMessageStatistics().setText(String.valueOf(messageList.size()));
+        gui.getjLabelTotalUserStatistics().setText(String.valueOf(userList.size()));
+        
+        gui.getjLabelTotalMessageStatistics24H().setText(String.valueOf(msgCounterLast24H));
+        gui.getjLabelTotalUserStatistics24H().setText(String.valueOf(userCounterLast24H));
     }
 
     /**
