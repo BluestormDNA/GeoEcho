@@ -90,17 +90,18 @@ public class GUIForm extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabelTotalUserStatistics = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        jLabelTotalUserStatistics24H = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabelTotalMessageStatistics = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
+        jLabelTotalMessageStatistics24H = new javax.swing.JLabel();
         jPanelMarker = new javax.swing.JPanel();
         jPanelMapSender = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextAreaSender = new javax.swing.JTextArea();
         jLabel23 = new javax.swing.JLabel();
+        jLabelMarkerAdminInfo = new javax.swing.JLabel();
         jPanelPolyline = new javax.swing.JPanel();
         jLabelPolyInfoServer = new javax.swing.JLabel();
         jButtonPolySearch = new javax.swing.JButton();
@@ -583,8 +584,8 @@ public class GUIForm extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Total Active Users (last 24h):");
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jLabel16.setText("0");
+        jLabelTotalUserStatistics24H.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabelTotalUserStatistics24H.setText("0");
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setText("Total Messages:");
@@ -595,8 +596,8 @@ public class GUIForm extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel19.setText("Total Messages (last 24h):");
 
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jLabel20.setText("0");
+        jLabelTotalMessageStatistics24H.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabelTotalMessageStatistics24H.setText("0");
 
         javax.swing.GroupLayout jPanelStadisticsLayout = new javax.swing.GroupLayout(jPanelStadistics);
         jPanelStadistics.setLayout(jPanelStadisticsLayout);
@@ -609,7 +610,7 @@ public class GUIForm extends javax.swing.JFrame {
                         .addComponent(jLabelTotalUserStatistics))
                     .addGroup(jPanelStadisticsLayout.createSequentialGroup()
                         .addGap(158, 158, 158)
-                        .addComponent(jLabel16))
+                        .addComponent(jLabelTotalUserStatistics24H))
                     .addGroup(jPanelStadisticsLayout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addComponent(jLabel15))
@@ -630,7 +631,7 @@ public class GUIForm extends javax.swing.JFrame {
                                 .addComponent(jLabelTotalMessageStatistics)
                                 .addGap(162, 162, 162))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelStadisticsLayout.createSequentialGroup()
-                                .addComponent(jLabel20)
+                                .addComponent(jLabelTotalMessageStatistics24H)
                                 .addGap(153, 153, 153))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelStadisticsLayout.createSequentialGroup()
                                 .addComponent(jLabel19)
@@ -649,7 +650,7 @@ public class GUIForm extends javax.swing.JFrame {
                         .addGap(118, 118, 118)
                         .addComponent(jLabel15)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel16))
+                        .addComponent(jLabelTotalUserStatistics24H))
                     .addGroup(jPanelStadisticsLayout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(jLabel17)
@@ -658,7 +659,7 @@ public class GUIForm extends javax.swing.JFrame {
                         .addGap(117, 117, 117)
                         .addComponent(jLabel19)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel20)))
+                        .addComponent(jLabelTotalMessageStatistics24H)))
                 .addContainerGap(92, Short.MAX_VALUE))
         );
 
@@ -676,18 +677,25 @@ public class GUIForm extends javax.swing.JFrame {
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel23.setText("PUBLIC MESSAGE SENDER");
 
+        jLabelMarkerAdminInfo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel23)
+                        .addGap(0, 8, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelMarkerAdminInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel23)
-                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -696,7 +704,9 @@ public class GUIForm extends javax.swing.JFrame {
                 .addComponent(jLabel23)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabelMarkerAdminInfo)
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         jPanelMarker.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 230, 450));
@@ -987,12 +997,10 @@ public class GUIForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -1007,6 +1015,7 @@ public class GUIForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelIconoCerrar;
     private javax.swing.JLabel jLabelIconoMinimizar;
     private javax.swing.JLabel jLabelLogo;
+    private javax.swing.JLabel jLabelMarkerAdminInfo;
     private javax.swing.JLabel jLabelPic1;
     private javax.swing.JLabel jLabelPic2;
     private javax.swing.JLabel jLabelPic3;
@@ -1015,7 +1024,9 @@ public class GUIForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSearch;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelTotalMessageStatistics;
+    private javax.swing.JLabel jLabelTotalMessageStatistics24H;
     private javax.swing.JLabel jLabelTotalUserStatistics;
+    private javax.swing.JLabel jLabelTotalUserStatistics24H;
     private javax.swing.JLabel jLabelUserInfoEmail;
     private javax.swing.JLabel jLabelUserInfoName;
     private javax.swing.JLabel jLabelUserInfoTotalMessages;
@@ -1199,6 +1210,18 @@ public class GUIForm extends javax.swing.JFrame {
 
     public javax.swing.JTextArea getjTextAreaSender() {
         return jTextAreaSender;
+    }
+
+    public javax.swing.JLabel getjLabelTotalMessageStatistics24H() {
+        return jLabelTotalMessageStatistics24H;
+    }
+
+    public javax.swing.JLabel getjLabelTotalUserStatistics24H() {
+        return jLabelTotalUserStatistics24H;
+    }
+
+    public javax.swing.JLabel getjLabelMarkerAdminInfo() {
+        return jLabelMarkerAdminInfo;
     }
 
     
