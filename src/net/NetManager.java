@@ -5,21 +5,18 @@
  */
 package net;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
+import java.security.GeneralSecurityException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
 import model.client.LoginDesk;
 import model.client.Message;
 import model.client.Packet;
@@ -40,30 +37,20 @@ public class NetManager {
 
     private URL url;
 
-    public NetManager(){
+    public NetManager() {
         try {
-            // Creamos un gestor de Certificados válidos
-            TrustManager[] trustAllCerts = new TrustManager[]{new NetTrustManager()};
-
-            // Añadimos el gestor de certificados válidos al contexto SSL
-            SSLContext sc = SSLContext.getInstance("TLSv1.2");
-            sc.init(null, trustAllCerts, new java.security.SecureRandom());
-
-            // Obtenemos el creador de sockets SSL y lo añadimos al HttpsURLConnection
-            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
-
-            // Verificamos todos los hostnames
-            HostnameVerifier allHostsValid = (String hostname, SSLSession session) -> true;
-
-            // Los añadimos en el HttpsURLConnection
-            HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
-
-            // Creamos el objeto URL
+            // Generams objeto URL
             url = new URL(URL);
-
-        } catch (KeyManagementException | NoSuchAlgorithmException | MalformedURLException ex) {
+            // Obtenemos el creador de sockets SSL y lo añadimos al HttpsURLConnection
+            HttpsURLConnection.setDefaultSSLSocketFactory(CustomSSLSocketFactory.getSSLSocketFactory(new File("x1.crt")));
+        } catch (IOException | GeneralSecurityException ex) {
             Logger.getLogger(NetManager.class.getName()).log(Level.SEVERE, null, ex);
         }
+        // Verificamos que el hostname se corresponde con el del servidor
+        HostnameVerifier hostsValid = (String hostname, SSLSession session)
+                -> hostname.equals("ec2-52-31-205-76.eu-west-1.compute.amazonaws.com");
+        // Los añadimos en el HttpsURLConnection
+        HttpsURLConnection.setDefaultHostnameVerifier(hostsValid);
     }
 
     /**
@@ -96,8 +83,10 @@ public class NetManager {
         try (ObjectInputStream in = new ObjectInputStream(con.getInputStream())) {
             packet = (Packet) in.readObject();
             System.out.println("RECEIVED ");
+
         } catch (ClassNotFoundException e) {
-            Logger.getLogger(NetManager.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(NetManager.class
+                    .getName()).log(Level.SEVERE, null, e);
         }
         return packet;
     }
@@ -151,8 +140,10 @@ public class NetManager {
 
         try {
             sendPacket(m);
+
         } catch (IOException ex) {
-            Logger.getLogger(NetManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NetManager.class
+                    .getName()).log(Level.SEVERE, null, ex);
             System.out.println("NO SE HA PODIDO ENVIAR EL MENSAJE");
         }
     }
@@ -168,15 +159,17 @@ public class NetManager {
         QueryDesk queryDesk = new QueryDesk();
         queryDesk.setSessionID(id);
         queryDesk.setUsername(user);
-        
+
         try {
             HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
             if (sendPacket(queryDesk)) {
                 System.out.println("inside");
                 responsePacket = (ResponseQueryDesk) getPacket(con);
+
             }
         } catch (IOException ex) {
-            Logger.getLogger(NetManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NetManager.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return responsePacket;
     }
