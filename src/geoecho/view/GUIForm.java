@@ -488,6 +488,7 @@ public class GUIForm extends javax.swing.JFrame {
         jToggleButtonBanUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jToggleButtonBanUser.setForeground(new java.awt.Color(255, 51, 51));
         jToggleButtonBanUser.setText("BAN USER");
+        jToggleButtonBanUser.setEnabled(false);
         jPanelUserInfo.add(jToggleButtonBanUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 330, -1, -1));
         jPanelUserInfo.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 319, 752, 10));
 
@@ -1224,5 +1225,4 @@ public class GUIForm extends javax.swing.JFrame {
         return jLabelMarkerAdminInfo;
     }
 
-    
 }

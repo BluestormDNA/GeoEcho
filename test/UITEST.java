@@ -43,7 +43,7 @@ public class UITEST extends JFrame {
 
         MapViewOptions options = new MapViewOptions();
         options.importPlaces();
-        this.add(new MapPanel(options, messageList));
+        //this.add(new MapPanel(options, messageList));
         this.setVisible(true);
     }
 }

@@ -2,27 +2,26 @@
  * App GeoEcho (Projecte final M13-DAM al IOC)
  * Copyright (c) 2018 - Papaya Team
  */
+
 package model.client;
 
-import java.io.Serializable;
-
 /**
- * Classe User que conté el model de l'usuari del sistema
+ * Classe UpdateUser que conté el model per actualitzar les dades d'un usuari al sistema
  * @author Dani Machado
  */
-public class User implements Serializable{
+public class UpdateUser extends Packet{
     private String username;
     private String password;
     private String email;
     private boolean adminuser;
     private boolean banned;
-    
+
     /**
      * Constructor per defecte
      */
-    public User() {
+    public UpdateUser() {
     }
-
+    
     /**
      * Constructor general
      * @param username
@@ -31,100 +30,102 @@ public class User implements Serializable{
      * @param adminuser
      * @param banned 
      */
-    public User(String username, String password, String email, boolean adminuser, boolean banned) {
+    public UpdateUser(String username, String password, String email, boolean adminuser, boolean banned) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.adminuser = adminuser;
         this.banned = banned;
     }
-    
+
     /**
-     * Getter username
-     * @return 
+     * Constructor per banejar/desbanejar usuari
+     * @param username
+     * @param banned 
+     */
+    public UpdateUser(String username, boolean banned) {
+        this.username = username;
+        this.banned = banned;
+    }
+
+    /**
+     *  Getter de username
+     * @return
      */
     public String getUsername() {
         return username;
     }
-    
+
     /**
-     * Setter username
-     * @param username 
+     * Setter de username
+     * @param username
      */
     public void setUsername(String username) {
         this.username = username;
     }
-    
+
     /**
      * Getter password
-     * @return 
+     * @return
      */
     public String getPassword() {
         return password;
     }
-    
+
     /**
      * Setter password
-     * @param password 
+     * @param password
      */
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     /**
      * Getter email
-     * @return 
+     * @return
      */
     public String getEmail() {
         return email;
     }
-    
+
     /**
      * Setter email
-     * @param email 
+     * @param email
      */
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     /**
      * Getter adminuser
-     * @return 
+     * @return
      */
     public boolean isAdminuser() {
         return adminuser;
     }
-    
+
     /**
-     * Setter adminuser
-     * @param adminuser 
+     * Setter admin user
+     * @param adminuser
      */
     public void setAdminuser(boolean adminuser) {
         this.adminuser = adminuser;
     }
-    
+
     /**
-     * Getter banned
-     * @return 
+     * Getter is banned
+     * @return
      */
     public boolean isBanned() {
         return banned;
     }
-    
+
     /**
      * Setter banned
-     * @param banned 
+     * @param banned
      */
     public void setBanned(boolean banned) {
         this.banned = banned;
     }
-    
-    /**
-     * toString de User
-     * @return dades del User
-     */
-    @Override
-    public String toString() {
-        return "User{" + "username=" + username + ", password=" + password + ", email=" + email + ", adminuser=" + adminuser + ", banned=" + banned + '}';
-    }    
+   
 }

@@ -28,24 +28,21 @@ public class MapPanelPolyLine extends MapView {
      * Genera un mapa de Google Maps por defecto
      */
     public MapPanelPolyLine() {
-        setOnMapReadyHandler(new MapReadyHandler() {
-            @Override
-            public void onMapReady(MapStatus status) {
-                if (status == MapStatus.MAP_STATUS_OK) {
-                    map = getMap();
-                    MapOptions mapOptions = new MapOptions();
-                    MapTypeControlOptions controlOptions = new MapTypeControlOptions();
-                    // Changing position of the map type control
-                    controlOptions.setPosition(ControlPosition.TOP_RIGHT);
-                    // Setting map type control options
-                    mapOptions.setMapTypeControlOptions(controlOptions);
-                    // Setting map options
-                    map.setOptions(mapOptions);
-                    // Setting the map center
-                    //map.setCenter(new LatLng(lat, lng)));
-                    // Setting initial zoom value
-                    map.setZoom(5.0);
-                }
+        setOnMapReadyHandler((MapStatus status) -> {
+            if (status == MapStatus.MAP_STATUS_OK) {
+                map = getMap();
+                MapOptions mapOptions = new MapOptions();
+                MapTypeControlOptions controlOptions = new MapTypeControlOptions();
+                // Changing position of the map type control
+                controlOptions.setPosition(ControlPosition.TOP_RIGHT);
+                // Setting map type control options
+                mapOptions.setMapTypeControlOptions(controlOptions);
+                // Setting map options
+                map.setOptions(mapOptions);
+                // Setting the map center
+                //map.setCenter(new LatLng(lat, lng)));
+                // Setting initial zoom value
+                map.setZoom(5.0);
             }
         });
 

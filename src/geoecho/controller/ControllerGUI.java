@@ -16,12 +16,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.List;
-import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,6 +57,7 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
         gui.getjButtonLogout().addActionListener(this);
         gui.getjButtonSearchUser().addActionListener(this);
         gui.getjButtonPolySearch().addActionListener(this);
+        gui.getjToggleButtonBanUser().addActionListener(this);
         gui.getjPanelBUser().addMouseListener(this);
         gui.getjPanelBWorld().addMouseListener(this);
         gui.getjPanelBStatistic().addMouseListener(this);
@@ -81,6 +80,8 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
                 handleUserSearch();
             } else if (ae.getSource().equals(gui.getjButtonPolySearch())) {
                 handlePolyLine();
+            } else if (ae.getSource().equals(gui.getjToggleButtonBanUser())) {
+                handleBan();
             }
         });
         thread.start();
@@ -145,10 +146,10 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
             }
         }
         userCounterLast24H = set.size();
-        
+
+        //Update Labels
         gui.getjLabelTotalMessageStatistics().setText(String.valueOf(messageList.size()));
         gui.getjLabelTotalUserStatistics().setText(String.valueOf(userList.size()));
-        
         gui.getjLabelTotalMessageStatistics24H().setText(String.valueOf(msgCounterLast24H));
         gui.getjLabelTotalUserStatistics24H().setText(String.valueOf(userCounterLast24H));
     }
@@ -173,18 +174,12 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
      * Desloguea al usuario y vuelve a ejecutar el form login
      */
     private void handleLogout() {
-        try {
             Logout logout = new Logout();
-            logout.setSessionID(net.getId());
+            //logout.setSessionID(net.getId());
             if (net.sendPacket(logout)) {
                 ControllerLogin login = new ControllerLogin();
                 gui.dispose();
-
             }
-        } catch (IOException ex) {
-            Logger.getLogger(ControllerGUI.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
@@ -204,6 +199,7 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
         // Comprueba los datos del servidor, si no son validos avisa
         if (responseQueryDesk == null) {
             gui.getjLabelUserServerInfo().setText(USER_NOT_FOUND);
+            gui.getjToggleButtonBanUser().setEnabled(false);
         } else {
             //Actualiza la vista del panel con los datos
             User user = responseQueryDesk.getUserList().get(0);
@@ -211,8 +207,9 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
             Collections.reverse(messageList);
 
             gui.getjPanelUserInfo().setVisible(true);
+            gui.getjToggleButtonBanUser().setEnabled(true);
+            gui.getjToggleButtonBanUser().setSelected(user.isBanned());
             gui.getjLabelUserInfoName().setText(user.getUsername());
-            System.out.println(user.getUsername());
             gui.getjLabelUserInfoEmail().setText(user.getEmail());
             gui.getjLabelUserInfoType().setText(user.isAdminuser() ? ADMIN : USER_BASE);
             gui.getjLabelUserInfoTotalMessages().setText(String.valueOf(messageList.size()));
@@ -287,8 +284,19 @@ class ControllerGUI extends MouseAdapter implements ActionListener {
      */
     private void initializeMarkerMap() {
         if (gui.getjPanelMapSender().getComponents().length == 0) {
-            gui.getjPanelMapSender().add(new MapPanelMarker(net, gui.getjTextAreaSender()));
+            gui.getjPanelMapSender().add(new MapPanelMarker(net, gui));
             gui.getjPanelMapSender().validate();
+        }
+    }
+
+    private void handleBan() {
+        String user = gui.getjTextFieldSearchUser().getText();
+        if (gui.getjToggleButtonBanUser().isSelected()) {
+            net.sendPacket(new UpdateUser(user, true));
+            System.out.println("BANNED");
+        } else {
+            net.sendPacket(new UpdateUser(user, false));
+            System.out.println("UN BANNED");
         }
     }
 

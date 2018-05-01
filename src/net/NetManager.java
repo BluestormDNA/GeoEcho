@@ -34,7 +34,6 @@ public class NetManager {
 
     private String user;
     private int id;
-
     private URL url;
 
     public NetManager() {
@@ -114,15 +113,19 @@ public class NetManager {
      *
      * @param packet Packet class
      * @return true si el paquete ha sido procesado por el servidor
-     * @throws IOException
      */
-    public boolean sendPacket(Packet packet) throws IOException {
+    public boolean sendPacket(Packet packet) {
         boolean handled = false;
-        HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+        try {
+            HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+            packet.setSessionID(id);
+            if (sendPost(con, packet) == HttpsURLConnection.HTTP_OK) {
+                System.out.println("SEND PACKET OK");
+                handled = true;
+            }
 
-        if (sendPost(con, packet) == HttpsURLConnection.HTTP_OK) {
-            System.out.println("SEND PACKET OK");
-            handled = true;
+        } catch (IOException ex) {
+            Logger.getLogger(NetManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return handled;
     }
@@ -137,15 +140,7 @@ public class NetManager {
     public void SendMessage(double x, double y, String text) {
         Message m = new Message((float) x, (float) y, text, null, user, null, new Date(), 10, true, true, false);
         m.setSessionID(id);
-
-        try {
-            sendPacket(m);
-
-        } catch (IOException ex) {
-            Logger.getLogger(NetManager.class
-                    .getName()).log(Level.SEVERE, null, ex);
-            System.out.println("NO SE HA PODIDO ENVIAR EL MENSAJE");
-        }
+        sendPacket(m);
     }
 
     /**
